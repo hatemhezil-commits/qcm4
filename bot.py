@@ -45,9 +45,10 @@ signalement :
   - 📚 Question dans la mauvaise leçon
   - ⚠️ Question/options incomplètes
 Chaque signalement est ajouté à reported_questions.json (type, question,
-options, bonne(s) réponse(s), module/leçon, utilisateur, date). La commande
-/reports renvoie ce fichier (réservée aux ADMIN_USER_IDS). Aucune
-notification n'est envoyée à l'admin : il consulte simplement le fichier.
+options, bonne(s) réponse(s), module/leçon, utilisateur, date) ET envoyé
+immédiatement en message privé à chaque admin de ADMIN_USER_IDS (pour qu'il
+le voie directement dans Telegram, sans avoir à lancer /reports).
+La commande /reports reste disponible pour récupérer le fichier complet.
 
 === PANNEAU ADMIN (/admin) ===
   - Liste paginée des utilisateurs du bot (bot_users.json), recherche par
@@ -653,52 +654,67 @@ async def save_report(record: dict):
 
 
 def format_report_message(record: dict) -> str:
-    """Met en forme un signalement sous forme de message Telegram destiné
-    aux admins (texte arabe simple, lisible sur téléphone)."""
+    """Construit le texte du message privé envoyé aux admins pour un signalement."""
     options = record.get("options") or []
-    correct = record.get("correct_options") or []
+    correct_texts = record.get("correct_options") or []
+    correct_indexes = {i for i, opt in enumerate(options) if opt in correct_texts}
+
     lines = [
-        "🚩 بلاغ جديد عن سؤال",
+        "🚩 إبلاغ جديد عن سؤال",
+        "Nouveau signalement de question",
         "",
-        f"🕐 {record.get('date', '?')}",
-        f"👤 @{record.get('username') or '?'}  (id: {record.get('user_id') or '?'})",
-        f"📌 السبب: {record.get('report_type_label') or '?'}",
-        f"🗂️ المصدر: {record.get('quiz_label') or (record.get('module') or '?')}",
+        f"النوع / Type : {record.get('report_type_label') or record.get('report_type')}",
+        f"المستخدم / Par : {record.get('username') or '?'} (ID: {record.get('user_id')})",
+        f"التاريخ / Date : {record.get('date')}",
     ]
+    if record.get("module"):
+        lines.append(f"📚 Module : {record['module']}")
     path = record.get("path") or []
     if path:
-        lines.append(f"📚 الدرس: {' > '.join(str(p) for p in path)}")
-    lines.append("")
-    lines.append("❓ " + str(record.get("question") or "?"))
-    if options:
-        lines.append("")
-        for opt in options:
-            lines.append(("✅ " if opt in correct else "▫️ ") + str(opt))
+        lines.append(f"📂 Leçon : {' > '.join(str(p) for p in path)}")
+    if record.get("quiz_label"):
+        lines.append(f"🏷️ Quiz : {record['quiz_label']}")
+
+    lines += ["", f"❓ {record.get('question')}", ""]
+    for i, opt in enumerate(options):
+        mark = "✅" if i in correct_indexes else "▪️"
+        letter = LETTERS[i] if i < len(LETTERS) else str(i + 1)
+        lines.append(f"{mark} {letter}. {opt}")
+
+    if correct_texts:
+        letters = []
+        for text in correct_texts:
+            try:
+                idx = options.index(text)
+                letters.append(LETTERS[idx] if idx < len(LETTERS) else text)
+            except ValueError:
+                letters.append(text)
+        lines += ["", f"✔️ Bonne(s) réponse(s) : {', '.join(letters)}"]
+
     text = "\n".join(lines)
-    # Telegram limite un message à 4096 caractères : on tronque doucement.
-    if len(text) > 3900:
-        text = text[:3850] + "\n… (تم اقتطاع رسالة البلاغ لأنها طويلة جدًا)"
-    return text
+    return text[:TG_MESSAGE_MAX]
 
 
-async def notify_admins_report(context: ContextTypes.DEFAULT_TYPE, record: dict):
-    """Envoie le signalement à chaque admin (ADMIN_USER_IDS) comme un simple
-    message Telegram. Meilleur effort : un échec n'interrompt jamais le bot,
-    et le fichier reported_questions.json reste écrit en parallèle."""
+async def notify_admins_about_report(context: ContextTypes.DEFAULT_TYPE, record: dict):
+    """Envoie le signalement en message privé à chaque admin (ADMIN_USER_IDS).
+    Un admin qui n'a jamais ouvert le bot ne peut pas être contacté : l'échec
+    est simplement journalisé, les autres admins reçoivent quand même le message."""
     if not ADMIN_USER_IDS:
-        logger.warning("Aucun admin configuré (ADMIN_USER_IDS) : signalement non envoyé.")
+        logger.warning("Signalement reçu mais ADMIN_USER_IDS est vide : aucun admin à prévenir.")
         return
+
     text = format_report_message(record)
     for admin_id in sorted(ADMIN_USER_IDS):
         try:
             await call_with_retry(
-                lambda aid=admin_id, t=text: context.bot.send_message(
-                    chat_id=aid, text=t, disable_web_page_preview=True
-                ),
-                label=f"notify report admin {aid}",
+                lambda aid=admin_id: context.bot.send_message(aid, text),
+                label=f"send_message(signalement admin {admin_id})",
             )
         except Exception as e:
-            logger.error("Notification du signalement à l'admin %s a échoué : %s", admin_id, e)
+            logger.warning(
+                "Impossible d'envoyer le signalement à l'admin %s "
+                "(a-t-il déjà démarré le bot ?) : %s", admin_id, e,
+            )
 
 
 def cleanup_question_context(context: ContextTypes.DEFAULT_TYPE = None):
@@ -772,8 +788,8 @@ async def handle_report_cancel(update: Update, context: ContextTypes.DEFAULT_TYP
 async def handle_report_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Clic sur un type de signalement : enregistre le signalement (type,
     question, options, bonne(s) réponse(s), module/leçon) dans
-    reported_questions.json, ET envoie un message d'alerte instantané à
-    chaque admin (ADMIN_USER_IDS) sur Telegram."""
+    reported_questions.json ET l'envoie en message privé aux admins
+    (ADMIN_USER_IDS) pour qu'ils le voient directement dans Telegram."""
     query = update.callback_query
     try:
         _, token, type_key = query.data.split(":", 2)
@@ -808,7 +824,7 @@ async def handle_report_type(update: Update, context: ContextTypes.DEFAULT_TYPE)
         "correct_options": correct_texts,
     }
     await save_report(record)
-    await notify_admins_report(context, record)
+    await notify_admins_about_report(context, record)
 
     await query.answer("🚩 Merci, la question a été signalée pour relecture.", show_alert=True)
     await _edit_markup(query, build_question_button_markup(token), "edit_markup(report done)")
