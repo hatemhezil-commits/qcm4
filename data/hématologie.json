@@ -2,6 +2,60 @@
   "module": "🩸 Hématologie",
   "lessons": {
     "Anémie hémolytique": {
+      "2027": [
+        {
+          "question": "Dans une anémie hémolytique auto-immune typique, on observe :",
+          "options": [
+            "Une hyperbilirubinémie mixte",
+            "Un fer sérique bas",
+            "Une anémie régénérative",
+            "Un test de Coombs direct positif"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Parmi les propositions suivantes concernant la drépanocytose, quelles sont celles qui sont justes :",
+          "options": [
+            "Est une anomalie qualitative de l'hémoglobine",
+            "Est une pathologie à transmission autosomique dominante",
+            "Le froid, la déshydratation, le stress, et l'infection protègent contre la falciformation des globules rouges",
+            "Les formes hétérozygotes sont généralement asymptomatiques."
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Les complications aiguës de la drépanocytose homozygote sont :",
+          "options": [
+            "Les infections",
+            "Les crises vaso-occlusives",
+            "La transformation en leucémie aiguë",
+            "La séquestration splénique chez l'enfant"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Quelle est la complication majeure chez un patient atteint de maladie de Cooley :",
+          "options": [
+            "Hémochromatose cardiaque",
+            "Hypersplénisme",
+            "Carence en fer",
+            "Carence en vitamine B12"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "L'hémoglobine S est une",
@@ -1480,6 +1534,34 @@
       ]
     },
     "Anémie par carence en facteurs antipernicieux (B9, B12)": {
+      "2027": [
+        {
+          "question": "La vitamine B12 est absorbée au niveau :",
+          "options": [
+            "De l'estomac",
+            "Du duodénum",
+            "Du jéjunum proximal",
+            "De l'iléon distal"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "À propos de la maladie de Biermer, quelles propositions sont exactes ?",
+          "options": [
+            "Les anticorps anti-facteur intrinsèque sont spécifiques",
+            "Elle est liée à une gastrite atrophique auto-immune fundique",
+            "Elle impose une surveillance endoscopique régulière",
+            "Le traitement par vitamine B12 est limité à 4 mois"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "L'anémie de Biermer est caractérisée par (une ou plusieurs réponses)",
@@ -1985,6 +2067,46 @@
       ]
     },
     "Anémies ferriprives (par carence en fer)": {
+      "2027": [
+        {
+          "question": "Une anémie hypochrome microcytaire est retrouvée dans :",
+          "options": [
+            "Une anémie ferriprive ou par carence en fer",
+            "Une leucémie aiguë",
+            "Une anémie inflammatoire",
+            "Une thalassémie hétérozygote"
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Au cours de la constitution d'une carence martiale, le premier paramètre qui s'abaisse est :",
+          "options": [
+            "L'hémoglobine",
+            "Le VGM",
+            "La ferritine",
+            "Le fer sérique"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Un homme de 25 ans dispose de ce bilan : Hb 11,8 g/dl, VGM 64 fl, GR 6,1 T/l, ferritine et CRP normales. Quel examen permet d'orienter le diagnostic ?",
+          "options": [
+            "Le myélogramme avec coloration de Perls",
+            "L'électrophorèse de l'hémoglobine",
+            "La fibroscopie œso-gastro-duodénale",
+            "Le dosage de la vitamine B12"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Patient âgé de 70 ans présentant des mélénas peu abondants depuis 6 mois, associés à une constipation. NFS : GB 10 000/mm³, Hb 8 g/dL, VGM 66 fL, CCMH 20 %, plaquettes 400 000/mm³. Interprétation de la NFS",
@@ -2792,6 +2914,36 @@
       ]
     },
     "Coagulation intra vasculaire disséminée (CIVD)": {
+      "2027": [
+        {
+          "question": "Dans la CIVD quelle(s) proposition(s) est/sont vraie(s) ?",
+          "options": [
+            "Elle correspond à une activation massive et incontrôlée de la coagulation.",
+            "Elle entraîne une consommation des plaquettes et des facteurs de la coagulation.",
+            "Le TCA est habituellement raccourci.",
+            "Le fibrinogène est souvent diminué."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Le traitement de la CIVD repose sur :",
+          "options": [
+            "L'héparinothérapie systématique",
+            "Le traitement de la cause déclenchante",
+            "La transfusion de plaquettes si saignement ou taux de plaquettes < 30 G/L.",
+            "L'administration de plasma frais congelé si TP < 50"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quel(s) signe(s) distingue(nt) la fibrinolyse primitive de la CIVD",
@@ -2919,6 +3071,59 @@
       ]
     },
     "Coagulopathies": {
+      "2027": [
+        {
+          "question": "L'hémophilie B est due à un déficit constitutionnel en :",
+          "options": [
+            "Facteur VIII",
+            "Facteur IX",
+            "Facteur XI",
+            "Facteur Willebrand"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Concernant la transmission de l'hémophilie, quelles propositions sont exactes ?",
+          "options": [
+            "La transmission est récessive liée au chromosome X",
+            "Toutes les filles d'un père hémophile sont conductrices obligatoires",
+            "Tous les fils d'un père hémophile sont hémophiles",
+            "Environ 30 % des cas sont sporadiques, sans antécédent familial connu"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Une hémophilie A modérée correspond à un taux de facteur VIII :",
+          "options": [
+            "< 1 %",
+            "Entre 1 et 5 %",
+            "Entre 5 et 40 %",
+            "Entre 40 et 60 %"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Concernant la carence en vitamine K, laquelle/lesquelles des proposition(s) est/sont vraie(s) ?",
+          "options": [
+            "Elle entraîne un allongement du TCA avec un TP normal.",
+            "Elle entraîne le déficit des facteurs II, VII, IX et X de la coagulation",
+            "Elle entraîne une élévation du fibrinogène",
+            "Elle est corrigée par administration de Vitamine K"
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Enfant Samir B., âgé de 2 ans, consulte pour une plaie frontale avec saignement important après une chute. ATCD : ecchymoses à l'âge de la marche, pas d'antécédents familiaux connus. Quels examens demander en première intention",
@@ -3526,6 +3731,22 @@
       ]
     },
     "Conduite à tenir devant une adénopathie et une splénomégalie": {
+      "2027": [
+        {
+          "question": "Quels sont les diagnostics évoqués devant une adénopathie localisée évoluant depuis plusieurs mois :",
+          "options": [
+            "La tuberculose ganglionnaire.",
+            "Un lymphome malin.",
+            "Une métastase ganglionnaire.",
+            "Une infection virale banale."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Une splénomégalie peut être retrouvée dans la ou les pathologie(s) suivante(s)",
@@ -4093,6 +4314,47 @@
       ]
     },
     "Cytopénies et aplasies medullaires": {
+      "2027": [
+        {
+          "question": "L'aplasie médullaire est caractérisée par :",
+          "options": [
+            "Une infiltration médullaire par des cellules blastiques",
+            "Un remplacement du tissu myéloïde médullaire par du tissu graisseux",
+            "L'absence de fibrose médullaire",
+            "La diminution du tissu myéloïde médullaire"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Le ou les caractère(s) suivant(s) concerne(nt) l'aplasie médullaire :",
+          "options": [
+            "Une anémie normochrome normocytaire régénérative",
+            "Une hyperleucocytose à polynucléose neutrophile",
+            "Les réponses a et b sont justes",
+            "Les réponses a et b sont fausses"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Citez les critères de gravité de Camitta de l'aplasie médullaire idiopathique :",
+          "options": [
+            "Taux de polynucléaires neutrophiles < 500/mm³",
+            "Taux d'éosinophiles > 100/mm³",
+            "Taux de plaquettes > 20 000/mm³",
+            "Taux de réticulocytes < 20 000/mm³"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Chez un patient de 38 ans atteint d'aplasie médullaire, qui a un taux de polynucléaires à 108/mm³, un taux de plaquettes à 34 000/mm³ et une hémoglobine à 6 g/dL, qui a un donneur HLA compatible",
@@ -4931,6 +5193,60 @@
       ]
     },
     "Dysglobulinemies": {
+      "2027": [
+        {
+          "question": "Quelle est la place du myélome multiple au sein des hémopathies malignes dans le monde ?",
+          "options": [
+            "Première position",
+            "Deuxième position après les lymphomes",
+            "Dernière position",
+            "Aucune donnée disponible."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Parmi les termes suivants décrivant le myélome multiple, quel(s) est (sont) celui (ceux) les plus adaptés ?",
+          "options": [
+            "Hémopathie maligne du sujet âgé",
+            "Se manifeste par des douleurs osseuses",
+            "Incurable à ce jour",
+            "Caractérisé par la présence du chromosome Philadelphie."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Quelles sont les complications rencontrées chez les patients atteints de myélome ?",
+          "options": [
+            "Une insuffisance rénale",
+            "Une hypocalcémie",
+            "Des infections",
+            "Des hémorragies cutanéo-muqueuses."
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        },
+        {
+          "question": "La macroglobulinémie de Waldenström est une maladie rare du sujet âgé. Quels sont les signes biologiques qui la définissent ?",
+          "options": [
+            "La présence de cellules blastiques dans le sang",
+            "La présence d'une IgM élevée dans le sérum",
+            "Des cytopénies",
+            "Une hyperlymphocytose modérée."
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le myélome multiple est",
@@ -6108,6 +6424,59 @@
       ]
     },
     "Groupes sanguins & transfusion": {
+      "2027": [
+        {
+          "question": "Quelles sont les réponses exactes concernant les conditions de donneur de sang :",
+          "options": [
+            "Le don est autorisé dès l'âge de 16 ans sans accord particulier.",
+            "Le poids minimum requis pour donner son sang est de 45 kg.",
+            "Les hommes peuvent effectuer jusqu'à 6 dons par an.",
+            "Il est conseillé de manger avant et après le don de sang."
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Concernant les accidents transfusionnels précoces, quelle(s) affirmation(s) est/sont exacte(s) ?",
+          "options": [
+            "L'accès hémolytique gravissime dû à une erreur ABO se manifeste par un choc initial, des urines rouge porto et un risque d'insuffisance rénale aiguë.",
+            "Le TRALI syndrome correspond à une surcharge volémique (OAP) par débit trop rapide.",
+            "Les frissons et l'hyperthermie isolés ne surviennent jamais lors d'une transfusion.",
+            "L'ictère retardé survient obligatoirement pendant la première minute de la transfusion."
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        },
+        {
+          "question": "Concernant la localisation et le développement des antigènes du système ABO, indiquez la proposition exacte :",
+          "options": [
+            "Les antigènes du système ABO se trouvent exclusivement à la surface des globules rouges.",
+            "Les antigènes du système ABO se développent très tardivement, uniquement après l'âge adulte.",
+            "Les antigènes A et B sont situés sur le chromosome 9 et se développent tôt chez le fœtus.",
+            "Les antigènes du système ABO sont absents des cellules endothéliales et rénales."
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Quelles sont les propositions justes dans le système rhésus :",
+          "options": [
+            "Les Ac sont réguliers et naturels",
+            "Le gène qui code pour l'Ag D est situé sur le chromosome 01",
+            "Les Ac sont irréguliers",
+            "La présence du gène H est indispensable pour la production des Ag."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Parmi ces antigènes, quel(s) est (sont) celui (ceux) qui définit (définissent) le système rhésus",
@@ -7118,6 +7487,21 @@
       ]
     },
     "Hémogramme hématimètrie": {
+      "2027": [
+        {
+          "question": "Interprétez les résultats suivants, concernant un patient de 60 ans qui consulte pour asthénie : GB : 10 000/mm³, GR : 3,8 M/mm³, Hématocrite : 29 %, Hémoglobine : 7 g/dl, Plaquettes : 540 000/mm³, taux de réticulocytes : 1,1 %",
+          "options": [
+            "Anémie microcytaire",
+            "Thrombopénie",
+            "Anémie régénérative",
+            "Anémie hypochrome"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Parmi les anomalies suivantes, lesquelles relèvent d'une poïkilocytose",
@@ -7533,6 +7917,134 @@
       ]
     },
     "Leucémies": {
+      "2027": [
+        {
+          "question": "Les caractères suivants sont retrouvés dans une leucémie aiguë :",
+          "options": [
+            "L'absence de syndrome tumoral",
+            "La présence d'une anémie normocytaire normochrome régénérative",
+            "Une infiltration médullaire par des blastes",
+            "Une hyperleucocytose à l'hémogramme"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Quel est l'élément qui est peu probable dans une leucémie aiguë :",
+          "options": [
+            "Une splénomégalie",
+            "Des adénopathies",
+            "Une hyperleucocytose à polynucléose neutrophile",
+            "Un taux de globules blancs normal."
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Dans la leucémie aiguë : la ou les réponse(s) juste(s) est/sont :",
+          "options": [
+            "Le syndrome hémorragique est de mécanisme périphérique.",
+            "L'hyperleucocytose correspond à une hyperlymphocytose",
+            "L'anémie est due à une carence en vitamine B12",
+            "L'infiltration médullaire par des blastes est supérieure à 20 %"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Dans une leucémie lymphoïde chronique le ou les élément(s) suivant(s) sont classiquement présents :",
+          "options": [
+            "Des adénopathies localisées compressives",
+            "Une leucopénie",
+            "Une hyperleucocytose avec hyperlymphocytose",
+            "Le diagnostic est histologique sur biopsie médullaire"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "La leucémie lymphoïde chronique :",
+          "options": [
+            "Est l'apanage de l'adulte jeune",
+            "Est selon la classification de Binet de stade A si le taux d'hémoglobine < à 10 gr/dl.",
+            "Ne nécessite pas de traitement lorsque le patient est de stade A",
+            "Le traitement de première ligne est une chimiothérapie suivie d'une intensification par autogreffe de cellules souches hématopoïétiques."
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Le diagnostic de la leucémie lymphoïde chronique est posé sur :",
+          "options": [
+            "L'étude cytologique médullaire",
+            "L'immunophénotypage des lymphocytes médullaires",
+            "L'immunophénotypage des lymphocytes sanguins",
+            "La biologie moléculaire"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "La leucémie myéloïde chronique est caractérisée par :",
+          "options": [
+            "La survenue chez un sujet âgé",
+            "Un tableau clinique comportant essentiellement des adénopathies généralisées symétriques et bilatérales.",
+            "Le diagnostic est basé sur l'immunophénotypage des lymphocytes sanguins",
+            "Un transcrit Bcr/abl toujours retrouvé."
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Le traitement de la leucémie myéloïde chronique comporte :",
+          "options": [
+            "Une abstention thérapeutique lorsque les adénopathies ne dépassent pas 10 cm",
+            "Une thérapie ciblée type anti tyrosine kinase",
+            "Une greffe de moelle osseuse systématique",
+            "Une radiothérapie après la fin de la chimiothérapie."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Les complications rencontrées dans la leucémie myéloïde chronique sont :",
+          "options": [
+            "La leucostase",
+            "Les complications métaboliques.",
+            "Les thromboses",
+            "Les hémorragies"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Quelles sont les complications rencontrées chez un patient atteint de leucémie lymphoïde chronique :",
+          "options": [
+            "Une transformation en leucémie aiguë myéloblastique",
+            "Les infections",
+            "Les cytopénies immunologiques",
+            "Une transformation en syndrome de Richter"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant le diagnostic biologique de la leucémie myéloïde chronique (LMC) en phase chronique, quelles propositions sont correctes",
@@ -9845,6 +10357,63 @@
       ]
     },
     "Lymphomes": {
+      "2027": [
+        {
+          "question": "Les symptômes B sont :",
+          "options": [
+            "Une fièvre inexpliquée ≥ 38 °C.",
+            "Des sueurs nocturnes profuses.",
+            "Un amaigrissement supérieur à 10 % d'un poids antérieur à six mois.",
+            "Un prurit isolé."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Dans le lymphome de Hodgkin la confirmation du diagnostic repose sur :",
+          "options": [
+            "Une ponction ganglionnaire seulement.",
+            "Une biopsie ganglionnaire avec étude histologique.",
+            "La TEP-TDM au 18F-FDG.",
+            "L'immunohistochimie de la biopsie ganglionnaire."
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Dans la classification d'Ann Arbor des lymphomes :",
+          "options": [
+            "Le stade I correspond à une seule aire ganglionnaire atteinte.",
+            "Le stade II correspond à une atteinte ganglionnaire des deux côtés du diaphragme.",
+            "Le stade III correspond à une atteinte ganglionnaire des deux côtés du diaphragme.",
+            "Le stade IV correspond à une atteinte d'un ou plusieurs organes extra ganglionnaires par voie hématogène."
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "À propos des lymphomes non hodgkiniens (LNH) :",
+          "options": [
+            "Ils peuvent avoir une présentation extra nodale ou extra ganglionnaire.",
+            "Le lymphome folliculaire est souvent indolent.",
+            "Le lymphome diffus à grandes cellules B est généralement agressif.",
+            "Le lymphome de Burkitt est peu prolifératif."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quels sont les signes généraux du lymphome de Hodgkin",
@@ -11781,6 +12350,35 @@
       ]
     },
     "Principe diagnostic et bilan pré thérapeutique": {
+      "2027": [
+        {
+          "question": "Pour évaluer l'état nutritionnel d'un patient, vous aurez besoin de :",
+          "options": [
+            "Anamnèse.",
+            "Examen clinique.",
+            "Bilan biologique.",
+            "Bilan radiologique."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Lesquels de ces examens sont des examens radiologiques fonctionnels :",
+          "options": [
+            "TDM thoracique.",
+            "IRM cérébrale.",
+            "Scintigraphie osseuse.",
+            "PET scanner à la FDG."
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Parmi les propositions suivantes, lesquelles correspondent aux objectifs du bilan préthérapeutique",
@@ -12104,6 +12702,21 @@
       ]
     },
     "Principes thérapeutiques et parcours de soins en oncologie": {
+      "2027": [
+        {
+          "question": "Quels sont les buts de la chimiothérapie adjuvante :",
+          "options": [
+            "Diminuer la taille tumorale.",
+            "Agir sur les micro métastases.",
+            "Diminuer le risque de récidive.",
+            "Soulager les symptômes."
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le principe de la thérapie ciblée repose sur",
@@ -12660,6 +13273,21 @@
       ]
     },
     "Prévention et dépistage des cancers": {
+      "2027": [
+        {
+          "question": "La prévention secondaire contre le cancer du poumon est : la ou les réponses justes",
+          "options": [
+            "Un dépistage de masse.",
+            "Fait à l'initiative du médecin.",
+            "Fait en présence de facteurs de risque uniquement.",
+            "Réalisé par une radiographie standard deux fois par an."
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Une augmentation de l'incidence des cancers hépatiques liée à une épidémie d'hépatite C est observée dans la région de Barika. Une campagne de dépistage est décidée. Il s'agit de",
@@ -13104,6 +13732,61 @@
       ]
     },
     "Purpura-thrombopénique-auto-immun": {
+      "2027": [
+        {
+          "question": "Les critères diagnostiques du PTAI sont :",
+          "options": [
+            "Absence de splénomégalie.",
+            "Présence d'une hyperleucocytose.",
+            "Absence d'une cause décelable.",
+            "Absence de mégacaryocytes au myélogramme."
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        },
+        {
+          "question": "Le PTAI :",
+          "options": [
+            "Peut-être de découverte fortuite.",
+            "Se caractérise par un syndrome hémorragique spontané.",
+            "Peut évoluer vers la guérison spontanée chez l'enfant.",
+            "Peut précéder une maladie auto immune chez l'adulte."
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "La physiopathologie au cours de PTAI :",
+          "options": [
+            "Est complexe faisant intervenir un mécanisme central et un mécanisme périphérique.",
+            "Est périphérique seulement.",
+            "La thrombopoïétine est élevée pour stimuler la moelle à produire les plaquettes.",
+            "Est due à des auto anticorps anti-plaquettaires."
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Dans le PTAI le traitement :",
+          "options": [
+            "Est toujours indiqué.",
+            "Repose sur les corticoïdes seulement.",
+            "La splénectomie est devenue rare après l'avènement des agonistes de la thrombopoïétine.",
+            "Peut se faire en ambulatoire."
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Une jeune femme de 19 ans consulte pour un purpura ; l'examen clinique retrouve des pétéchies et quelques ecchymoses aux membres sans autre anomalie. Les explorations sanguines retrouvent un taux de plaquettes à 17 000/mm³, un taux d'hémoglobine à 13 g/dL et un taux de globules blancs à 10 000/mm³. Vous évoquez en premier le diagnostic suivant",
@@ -13695,6 +14378,22 @@
       ]
     },
     "Syndrome hémorragique": {
+      "2027": [
+        {
+          "question": "Quels éléments constituent des signes d'alerte devant un syndrome hémorragique ?",
+          "options": [
+            "Une hypotension ou une tachycardie.",
+            "Des céphalées brutales ou un déficit neurologique.",
+            "Un purpura isolé sans autre signe clinique.",
+            "Une hémorragie digestive importante."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        }
+      ],
       "2025": [
         {
           "question": "Une thrombopénie est symptomatique si le taux de plaquettes est",
@@ -13917,6 +14616,20 @@
       ]
     },
     "Thérapie cellulaire": {
+      "2027": [
+        {
+          "question": "L'intensification avec autogreffe de cellules souches hématopoïétiques est indiquée en première ligne chez :",
+          "options": [
+            "Un patient de moins de 65 ans atteint de lymphome malin non Hodgkinien",
+            "Un patient de moins de 65 ans atteint de lymphome Hodgkinien",
+            "Un patient de moins de 65 ans atteint de leucémie aiguë",
+            "Un patient de moins de 65 ans atteint de myélome multiple"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quelles cellules souches hématopoïétiques sont utilisées en procréation médicale assistée",
@@ -14214,6 +14927,20 @@
       ]
     },
     "Échelle d'évaluation en oncologie et classification des cancers": {
+      "2027": [
+        {
+          "question": "La classification pTNM désigne une :",
+          "options": [
+            "Classification TNM clinique.",
+            "Classification TNM radiologique sur échographie.",
+            "Classification TNM radiologique sur scanner.",
+            "Classification TNM histologique sur pièce opératoire."
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "La classification pTNM désigne",
@@ -14430,6 +15157,72 @@
       ]
     },
     "Épidémiologie cancérigènese et facteurs de risque": {
+      "2027": [
+        {
+          "question": "Parmi ces propositions concernant les proto-oncogènes, quelles réponses sont justes :",
+          "options": [
+            "Le proto-oncogène est un gène normalement présent dans le génome.",
+            "La transformation des proto-oncogènes nécessite la mutation de 02 allèles.",
+            "Le gène p53 est un proto-oncogène.",
+            "Ce sont des régulateurs positifs de la prolifération cellulaire."
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Selon la classification des cancérigènes de l'IARC, la classe 2A signifie que :",
+          "options": [
+            "Il s'agit d'un cancérogène prouvé chez l'homme.",
+            "Il s'agit d'un cancérogène probable (les preuves sont limitées chez l'humain mais suffisantes chez l'humain).",
+            "Il s'agit d'un cancérogène possible (évidence de cancerogénicité limitée chez l'humain et chez l'animal)",
+            "Non classé comme cancérogène."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Concernant les sources des données épidémiologiques du cancer, quelles sont les propositions justes ?",
+          "options": [
+            "Les registres de cancer sont la principale source d'incidence.",
+            "Les certificats de décès sont une source importante d'estimation de la mortalité.",
+            "GLOBOCAN fournit des estimations internationales de l'incidence, de la mortalité et de la prévalence des cancers.",
+            "Nous disposons de 05 principaux registres de cancer en Algérie."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "La létalité d'une maladie correspond à :",
+          "options": [
+            "Le nombre de décès rapporté à la population générale",
+            "Le risque de décès chez les personnes atteintes de la maladie.",
+            "Le nombre de nouveaux cas sur une période donnée",
+            "Le nombre total de décès enregistrés dans une population"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Parmi les types histologiques suivants, lesquels désignent un cancer d'origine épithéliale :",
+          "options": [
+            "Angiosarcome",
+            "Mélanome",
+            "Adénocarcinome",
+            "Carcinome épidermoïde"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant les proto-oncogènes, quelles propositions sont justes",

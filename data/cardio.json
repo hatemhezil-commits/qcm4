@@ -2,6 +2,49 @@
   "module": "🫀 Cardiologie",
   "lessons": {
     "Anévrisme & dissection aortique": {
+      "2027": [
+        {
+          "question": "Le mécanisme de l'insuffisance aortique au cours de la dissection aortique est lié à :",
+          "options": [
+            "Un élargissement de l'anneau aortique par l'hématome disséquant",
+            "Un prolapsus du voile intimal dans la chambre de chasse du VG",
+            "Une rupture des cordages",
+            "Une thrombose de la valve"
+          ],
+          "correct_option_ids": [
+            0,
+            1
+          ]
+        },
+        {
+          "question": "Les signes évocateurs d'une dissection aortique sont :",
+          "options": [
+            "Anisotension",
+            "Pouls paradoxal",
+            "Souffle diastolique d'insuffisance aortique",
+            "Douleur thoracique"
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Les étiologies de l'anévrysme de l'aorte sont :",
+          "options": [
+            "Syndrome de Marfan",
+            "Bicuspidie Aortique",
+            "HTA",
+            "RAA"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Les signes évocateurs d'une dissection aortique sont :",
@@ -586,6 +629,33 @@
       ]
     },
     "Artériopathie & ischémie aiguë": {
+      "2027": [
+        {
+          "question": "Concernant l'AOMI, l'IPS :",
+          "options": [
+            "Permet d'évaluer la gravité de l'AOMI",
+            "Permet d'orienter vers une ischémie critique",
+            "Permet de poser le diagnostic d'une AOMI sur vascularite",
+            "Consiste à mesurer la pression cutanée en oxygène"
+          ],
+          "correct_option_ids": [
+            0,
+            1
+          ]
+        },
+        {
+          "question": "Dans la classification de Leriche-Fontaine, à quel stade correspond une claudication intermittente survenant après un périmètre de marche supérieur à 200 mètres ?",
+          "options": [
+            "Stade I",
+            "Stade IIa",
+            "Stade IIb",
+            "Stade III"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le symptôme typique de l'AOMI au stade 2 de Leriche et Fontaine est :",
@@ -1203,6 +1273,20 @@
       ]
     },
     "Cardiopathies congénitales": {
+      "2027": [
+        {
+          "question": "Parmi les complications des shunts droits gauches, cochez la mauvaise réponse :",
+          "options": [
+            "Malaises hypoxiques",
+            "AVC ischémique",
+            "Endocardites infectieuses",
+            "HTAP"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant les shunts gauche-droit, cochez la ou les proposition(s) juste(s) :",
@@ -1515,6 +1599,33 @@
       ]
     },
     "Diurétiques & vasodilatateurs": {
+      "2027": [
+        {
+          "question": "Par quel mécanisme les diurétiques de l'anse de Henlé empêchent-ils la réabsorption du sodium ?",
+          "options": [
+            "Ils inhibent directement le cotransporteur NaCl.",
+            "Ils inhibent directement le cotransporteur Na-K-2Cl.",
+            "Ils inhibent directement le canal épithélial sodique du tube collecteur (ENaC).",
+            "Ils antagonisent le récepteur à l'aldostérone dans la cellule principale du tube collecteur."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quelles propositions sont exactes concernant l'action des inhibiteurs de l'enzyme de conversion (IEC) ?",
+          "options": [
+            "Ils inhibent la dégradation de l'angiotensine II.",
+            "Ils inhibent la dégradation de la bradykinine.",
+            "Ils inhibent la transformation de l'angiotensine I.",
+            "Ils inhibent la production d'angiotensinogène."
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Parmi les indications validées des bloqueurs du SRAA, cochez les réponses justes :",
@@ -1724,6 +1835,36 @@
       ]
     },
     "ECG normal": {
+      "2027": [
+        {
+          "question": "En rythme sinusal normal :",
+          "options": [
+            "L'onde P traduit la dépolarisation auriculaire.",
+            "Une onde P précède habituellement chaque QRS.",
+            "L'onde P est généralement positive en DII.",
+            "L'onde P est habituellement positive en AVR."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Concernant le segment ST et l'onde T :",
+          "options": [
+            "Le segment ST normal est généralement proche de la ligne isoélectrique.",
+            "L'onde T correspond à la repolarisation ventriculaire.",
+            "Un sus-décalage du ST est toujours physiologique.",
+            "L'interprétation du ST doit tenir compte du contexte et des dérivations concernées."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "La durée normale de l'intervalle PR chez l'adulte se situe entre :",
@@ -1871,6 +2012,21 @@
       ]
     },
     "ECG pathologique": {
+      "2027": [
+        {
+          "question": "Un bloc de branche gauche complet (BBG) sur l'ECG se définit par :",
+          "options": [
+            "Un complexe QRS de durée ≥ 120 ms.",
+            "Une onde Q en V1 et V2.",
+            "Une onde R large et monophasique en V6.",
+            "Des ondes T asymétriques en regard des dérivations où le QRS est principalement négatif."
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quelle est la formule de calcul de l'indice de Sokolow-Lyon :",
@@ -2319,6 +2475,20 @@
       ]
     },
     "Endocardite infectieuse": {
+      "2027": [
+        {
+          "question": "Les germes les plus souvent responsables de l'endocardite infectieuse aiguë :",
+          "options": [
+            "Coxiella burnetii",
+            "Brucella spp",
+            "Les staphylocoques",
+            "Les streptocoques"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant l'endocardite infectieuse, cochez la ou les bonne(s) réponse(s) :",
@@ -2713,6 +2883,33 @@
       ]
     },
     "HTA": {
+      "2027": [
+        {
+          "question": "Un patient de 50 ans diabétique, présente une TA à 170/95 mm Hg au cabinet et une MAPA confirmant une HTA systolo-diastolique diurne et nocturne. Quelle sera votre décision concernant sa prise en charge thérapeutique, cochez la ou les réponses juste(s) ?",
+          "options": [
+            "Mesures hygiéno-diététiques (MHD) seules pendant 6 mois puis introduire un traitement antihypertenseur si TA non contrôlée",
+            "Débuter le traitement antihypertenseur par une monothérapie associé à des MHD",
+            "Débuter le traitement antihypertenseur par une bithérapie faiblement dosée associée à des MHD",
+            "Il faut éliminer une urgence hypertensive"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Un patient âgé de 62 ans se présente en consultation pour oppression thoracique, la tension artérielle prise aux 2 bras et à 3 reprises avec un appareil automatique validé est PAS 200 mmHg et une PAD 110 mmHg, cochez la ou les réponse(s) juste(s) :",
+          "options": [
+            "Il s'agit d'une pression artérielle élevée",
+            "Il faut éliminer une urgence hypertensive",
+            "Il s'agit d'une HTA et il faut commencer le traitement anti hypertenseur d'emblée",
+            "Il faut confirmer l'HTA par une MAPA ou automesure tensionnelle"
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Un patient de 65 ans diabétique présente une TA à 162/95 mmHg au cabinet et une MAPA confirmant une HTA systolo-diastolique diurne et nocturne. Quelle sera votre décision concernant sa prise en charge thérapeutique, cochez la ou les réponse(s) juste(s) :",
@@ -3053,6 +3250,35 @@
       ]
     },
     "Hypertension artérielle pulmonaire (HTAP) & insuffisance ventriculaire gauche": {
+      "2027": [
+        {
+          "question": "Concernant la circulation pulmonaire normale au repos, quelle(s) est (sont) l'(les) affirmation(s) exacte(s) ?",
+          "options": [
+            "C'est une circulation à haute pression et bas débit.",
+            "La pression artérielle pulmonaire moyenne (PAPm) au repos est inférieure ou égale à 20 mm Hg.",
+            "Elle est très fortement résistive.",
+            "Elle assure l'hématose."
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Quel est le rôle du cathétérisme cardiaque droit dans la démarche diagnostique d'une HTP ?",
+          "options": [
+            "Il permet de mesurer les pressions pulmonaires.",
+            "C'est le seul examen indispensable pour distinguer le caractère pré- ou post-capillaire de l'HTP.",
+            "Il constitue le diagnostic de certitude d'une HTP.",
+            "Il est strictement contre-indiqué en cas de suspicion d'HTP post-capillaire."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "L'hypertension artérielle pulmonaire (HTAP) est caractérisée par, cochez la ou les réponse(s) juste(s) :",
@@ -3385,6 +3611,35 @@
       ]
     },
     "Insuffisance aortique (IA) & mitrale (IM)": {
+      "2027": [
+        {
+          "question": "Concernant l'insuffisance mitrale aiguë sévère :",
+          "options": [
+            "Elle peut être provoquée par une rupture de muscle papillaire.",
+            "Elle peut compliquer une endocardite infectieuse.",
+            "L'oreillette gauche est toujours très dilatée.",
+            "Elle peut entraîner un œdème aigu pulmonaire."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Les caractéristiques d'un souffle d'insuffisance aortique :",
+          "options": [
+            "Souffle protodiastolique doux humé aspiratif",
+            "Souffle mesosystolique rude rapeux",
+            "Irradiant vers les vaisseaux du cou",
+            "Irradiant le long du bord gauche de sternum"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quelle est la cause la plus fréquente de rupture d'un pilier de la valve mitrale ?",
@@ -3912,6 +4167,36 @@
       ]
     },
     "Insuffisance cardiaque congestive": {
+      "2027": [
+        {
+          "question": "Concernant l'insuffisance cardiaque :",
+          "options": [
+            "Elle correspond à l'incapacité du cœur à assurer un débit sanguin suffisant",
+            "Elle peut être systolique ou diastolique",
+            "Elle peut être aiguë ou chronique",
+            "Elle est toujours associée à une baisse de la fraction d'éjection"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Concernant le traitement de l'insuffisance cardiaque à FEVG réduite :",
+          "options": [
+            "Les bêta-bloquants diminuent la mortalité",
+            "Les IEC diminuent la mortalité",
+            "Les diurétiques améliorent les symptômes",
+            "Les AINS sont recommandés"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant l'insuffisance cardiaque à fraction d'éjection (FE) réduite, cochez la ou les réponse(s) juste(s) :",
@@ -4302,6 +4587,21 @@
       ]
     },
     "Péricardites aigues & chroniques": {
+      "2027": [
+        {
+          "question": "Au cours de la tamponnade cardiaque :",
+          "options": [
+            "L'arrêt cardiaque est due à une asystolie",
+            "L'arrêt cardiaque est due à une adiastolie",
+            "Les signes d'IC droite sont présent",
+            "Le pouls paradoxal est absent"
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Au cours de la tamponnade cardiaque, cochez la ou les réponse(s) juste(s) :",
@@ -4828,6 +5128,34 @@
       ]
     },
     "Questions de synthèse & td": {
+      "2027": [
+        {
+          "question": "Un homme de 60 ans, diabétique depuis 15 ans, qui présente une néphropathie diabétique (DFG 40 ml/min), ce patient a un risque cardio-vasculaire :",
+          "options": [
+            "Faible",
+            "Modérée",
+            "Élevée",
+            "Très élevée"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Les cardiopathies mal tolérées pendant la grossesse sont :",
+          "options": [
+            "Rétrécissement mitral serré",
+            "Hypertension pulmonaire",
+            "Syndrome de Marfan avec dilatation aortique",
+            "Communication interauriculaire simple"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Parmi les variables suivantes, laquelle n'est pas incluse dans le SCORE2 ?",
@@ -5035,7 +5363,9 @@
             "Risque modéré.",
             "Risque modéré a élevé."
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            2
+          ]
         },
         {
           "question": "Selon la table SCORE, Quel est le risque cardiovasculaire d'un patient âgé de 70 ans, hypertendu de grade I depuis 5 ans et aux ATCDs d'infarctus de myocarde avec fonction rénale normale ?",
@@ -5059,7 +5389,9 @@
             "Une dissection de l'aorte.",
             "Une insuffisance cardiaque droite aigue."
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            0
+          ]
         }
       ]
     },
@@ -5106,6 +5438,48 @@
       ]
     },
     "Rétrécissement aortique (ra) & mitral (rm)": {
+      "2027": [
+        {
+          "question": "Concernant le rétrécissement mitral, quelles sont les propositions exactes ?",
+          "options": [
+            "Il correspond à un obstacle au remplissage du ventricule gauche.",
+            "Le rhumatisme articulaire aigu est une cause classique de RM.",
+            "Il entraîne une augmentation de la pression dans l'oreillette gauche.",
+            "Il peut se compliquer d'une hypertension artérielle pulmonaire."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Le traitement de référence dans le rétrécissement aortique chez un sujet de 65 ans à faible risque chirurgical :",
+          "options": [
+            "Valvuloplastie par ballonnet",
+            "Implantation percutanée d'une valve aortique (TAVI)",
+            "Angioplastie coronaire",
+            "Remplacement valvulaire chirurgical (RVAo)"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Le rétrécissement aortique bas débit bas gradient se caractérise par :",
+          "options": [
+            "Gradient moyen supérieur ou égale à 40 mmHg",
+            "Vmax supérieur à 4 m/s",
+            "Fraction d'éjection réduite",
+            "Gradient moyen inférieur a 40 mmHg"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "En cas de rétrécissement mitral, quel est l'élément de l'auscultation qui disparaît en cas d'arythmie complète par fibrillation auriculaire ?",
@@ -5706,6 +6080,70 @@
       ]
     },
     "Syndrome coronarien aigu": {
+      "2027": [
+        {
+          "question": "En cas de syndrome coronarien chronique, l'objectif de LDL-cholestérol est :",
+          "options": [
+            "<0,85 g/l",
+            "<0,75 g/l",
+            "<0,65 g/l",
+            "<0,55 g/l"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        },
+        {
+          "question": "Une femme de 62 ans présente un angor d'effort typique, sans anomalie à l'ECG de repos et sans antécédent connu. Quelle stratégie diagnostique est pertinente ?",
+          "options": [
+            "Éliminer le diagnostic de maladie coronaire devant un ECG normal",
+            "Envisager un Coro scanner ou imagerie fonctionnelle selon la probabilité clinique, les comorbidités et les disponibilités locales.",
+            "Réaliser systématiquement une coronarographie invasive",
+            "Envisager une épreuve d'effort seule quelle que soit la probabilité clinique."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quel mécanisme physiopathologique est le plus fréquent dans un NSTEMI ?",
+          "options": [
+            "Embolie coronaire",
+            "Occlusion coronaire complète",
+            "Rupture de plaque avec thrombus partiellement occlusif",
+            "Spasme coronaire"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Quelles sont les indications d'une coronarographie immédiatement (moins de 2h) dans un NSTEMI ?",
+          "options": [
+            "Douleur thoracique réfractaire au traitement médical optimal",
+            "Signes d'OAP",
+            "État de choc cardiogénique",
+            "Hypertension artérielle sévère"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Les critères électriques d'un IDM avec sus décalage persistant du segment ST dans le territoire inferieur, cochez la réponse juste :",
+          "options": [
+            "Sus décalage du point J ≥ 1 mm dans les dérivations D2, D3, AvF",
+            "Sus décalage du point J ≥ 1 mm dans les dérivations V5-V6",
+            "Sus décalage du point J ≥ 0,5 mm dans les dérivations V5-V6",
+            "Sus décalage du point J ≥ 1 mm dans les dérivations D1-AvL"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quel(s) est (sont) le(s) critère(s) d'un angor d'effort typique ?",
@@ -6600,6 +7038,61 @@
       ]
     },
     "Thrombolytiques anticoagulants antiagrégants plaquettaire": {
+      "2027": [
+        {
+          "question": "Parmi les affirmations suivantes concernant les HNF, lesquelles sont correctes ?",
+          "options": [
+            "Les HNF sont des inhibiteurs du facteur IIa et Xa.",
+            "Elles sont autorisées chez la femme enceinte et allaitante.",
+            "Leur élimination est essentiellement rénale.",
+            "On peut surveiller leur efficacité par INR et leur effet indésirable par FNS."
+          ],
+          "correct_option_ids": [
+            0,
+            1
+          ]
+        },
+        {
+          "question": "Concernant les prothèses valvulaires mécaniques :",
+          "options": [
+            "Elles ont une grande durabilité.",
+            "Elles nécessitent généralement une anticoagulation prolongée par AVK.",
+            "Elles ne présentent aucun risque thromboembolique.",
+            "Leur surveillance comprend le contrôle de l'INR."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Concernant les bioprothèses :",
+          "options": [
+            "Leur durabilité est limitée.",
+            "Elles peuvent se dégénérer et entraîner une sténose ou une fuite.",
+            "Elles nécessitent systématiquement une anticoagulation à vie chez tous les patients.",
+            "Leur suivi doit être poursuivi au long cours."
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Dans l'infarctus du myocarde, un traitement thrombolytique est indiqué :",
+          "options": [
+            "Lorsque le délai du début de la douleur est moins de 12 heures",
+            "Chez un patient avec des antécédents d'accident vasculaire cérébral hémorragique",
+            "Devant un sus décalage persistant du segment ST d'au moins 1 mm dans les dérivations inférieures et lorsque le délai du début de la douleur est de 15 heures",
+            "Devant un sous décalage du segment ST d'au moins 1 mm dans les dérivations inférieures et lorsque le délai du début de la douleur est de 4 heures"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le score CHA₂DS₂-VASc sert à :",
@@ -7957,6 +8450,77 @@
       ]
     },
     "Troubles de l'excitabilité": {
+      "2027": [
+        {
+          "question": "A propos de la torsade de pointe lesquelles sont vraies ?",
+          "options": [
+            "Elle s'accompagne souvent d'un QTc long",
+            "Le traitement repose sur le magnésium en IV",
+            "Elle peut survenir en absence de cardiopathie sous-jacente",
+            "Il s'agit d'une TV polymorphe"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Un patient de 65 ans, aux antécédents de cardiopathie ischémique, consulte pour des palpitations. L'ECG montre une tachycardie régulière à QRS larges, à 180 bpm. Quelle(s) proposition(s) est/sont exacte(s) ?",
+          "options": [
+            "Une TV est le diagnostic le plus probable.",
+            "Une TSV doit être considérée comme le diagnostic prioritaire.",
+            "La présence d'une dissociation auriculo-ventriculaire est en faveur d'une TV.",
+            "La présence d'une concordance positive des QRS dans les dérivations précordiales est en faveur de TV"
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Dans la FA, la stratégie « contrôle de la fréquence » repose sur :",
+          "options": [
+            "Bêtabloquants",
+            "Inhibiteurs calciques bradycardisants",
+            "Digoxine (selon terrain)",
+            "Cardioversion électrique"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "La tachycardie atriale multifocale (TAM) se caractérise par :",
+          "options": [
+            "≥ 3 morphologies d'ondes P",
+            "Rythme irrégulier",
+            "QRS fins",
+            "PR constant"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Les indications classiques à la pose d'un stimulateur cardiaque (pacemaker) permanent sont :",
+          "options": [
+            "Un BAV du 1er degré asymptomatique.",
+            "Un BAV complet symptomatique.",
+            "Un BAV du 2e degré type Mobitz I, même asymptomatique.",
+            "Une bradycardie sinusale asymptomatique à 50/min chez un sportif"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quel(s) est (sont) le(s) critère(s) électrique(s) en faveur d'une TV ?",
