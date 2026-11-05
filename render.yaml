@@ -24,3 +24,14 @@ services:
       # IDs Telegram des admins, séparés par des virgules.
       - key: ADMIN_USER_IDS
         value: "5696844039"
+      # Correction des questions signalées directement depuis Telegram :
+      # le bot commit le fichier data/*.json sur GitHub (disque Render temporaire).
+      # Token GitHub avec « Contents: Read and write » sur ce dépôt, à saisir
+      # dans le Dashboard (jamais dans Git). Sans lui, les corrections sont
+      # perdues au redéploiement suivant.
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_REPO
+        value: hatemhezil-commits/qcm4
+      - key: GITHUB_BRANCH
+        value: main

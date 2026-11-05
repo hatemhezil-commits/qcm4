@@ -77,6 +77,23 @@ git push -u origin main
 
 اضغط **Save** → سيُعاد النشر تلقائيًا.
 
+### 3.b تصحيح الأسئلة من تلجرام (مستحسن)
+
+عند وصول بلاغ عن سؤال، يصلك في تلجرام مع أزرار:
+**✏️ Texte** (نص السؤال)، **🔤 Options** (الخيارات)، **✅ Bonne réponse**
+(الجواب الصحيح)، **🗑️ Supprimer** (حذف السؤال).
+
+لكي تبقى التعديلات بعد إعادة النشر (قرص Render مؤقت)، يحتاج البوت إلى
+التزام (commit) الملف `data/*.json` على GitHub:
+
+1. أنشئ **Fine-grained token**: https://github.com/settings/tokens?type=beta
+2. Repository access → **Only select repositories** → `qcm4`
+3. Permissions → Repository permissions → **Contents: Read and write**
+4. انسخ التوكن وأضفه في Render → Environment باسم `GITHUB_TOKEN`
+   (و`GITHUB_REPO=hatemhezil-commits/qcm4`، `GITHUB_BRANCH=main` إن لم تكونا موجودتين).
+
+بدون `GITHUB_TOKEN` يعمل التعديل فورًا لكنه يُفقد عند كل إعادة نشر.
+
 ---
 
 ## 4. التحقق
