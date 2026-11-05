@@ -652,6 +652,55 @@ async def save_report(record: dict):
             logger.error("Impossible d'écrire dans %s : %s", REPORTS_FILE, e)
 
 
+def format_report_message(record: dict) -> str:
+    """Met en forme un signalement sous forme de message Telegram destiné
+    aux admins (texte arabe simple, lisible sur téléphone)."""
+    options = record.get("options") or []
+    correct = record.get("correct_options") or []
+    lines = [
+        "🚩 بلاغ جديد عن سؤال",
+        "",
+        f"🕐 {record.get('date', '?')}",
+        f"👤 @{record.get('username') or '?'}  (id: {record.get('user_id') or '?'})",
+        f"📌 السبب: {record.get('report_type_label') or '?'}",
+        f"🗂️ المصدر: {record.get('quiz_label') or (record.get('module') or '?')}",
+    ]
+    path = record.get("path") or []
+    if path:
+        lines.append(f"📚 الدرس: {' > '.join(str(p) for p in path)}")
+    lines.append("")
+    lines.append("❓ " + str(record.get("question") or "?"))
+    if options:
+        lines.append("")
+        for opt in options:
+            lines.append(("✅ " if opt in correct else "▫️ ") + str(opt))
+    text = "\n".join(lines)
+    # Telegram limite un message à 4096 caractères : on tronque doucement.
+    if len(text) > 3900:
+        text = text[:3850] + "\n… (تم اقتطاع رسالة البلاغ لأنها طويلة جدًا)"
+    return text
+
+
+async def notify_admins_report(context: ContextTypes.DEFAULT_TYPE, record: dict):
+    """Envoie le signalement à chaque admin (ADMIN_USER_IDS) comme un simple
+    message Telegram. Meilleur effort : un échec n'interrompt jamais le bot,
+    et le fichier reported_questions.json reste écrit en parallèle."""
+    if not ADMIN_USER_IDS:
+        logger.warning("Aucun admin configuré (ADMIN_USER_IDS) : signalement non envoyé.")
+        return
+    text = format_report_message(record)
+    for admin_id in sorted(ADMIN_USER_IDS):
+        try:
+            await call_with_retry(
+                lambda aid=admin_id, t=text: context.bot.send_message(
+                    chat_id=aid, text=t, disable_web_page_preview=True
+                ),
+                label=f"notify report admin {aid}",
+            )
+        except Exception as e:
+            logger.error("Notification du signalement à l'admin %s a échoué : %s", admin_id, e)
+
+
 def cleanup_question_context(context: ContextTypes.DEFAULT_TYPE = None):
     """Supprime les contextes de question trop anciens pour éviter une fuite
     mémoire sur un processus qui tourne longtemps avec beaucoup d'utilisateurs."""
@@ -723,7 +772,8 @@ async def handle_report_cancel(update: Update, context: ContextTypes.DEFAULT_TYP
 async def handle_report_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Clic sur un type de signalement : enregistre le signalement (type,
     question, options, bonne(s) réponse(s), module/leçon) dans
-    reported_questions.json. Aucune notification n'est envoyée à l'admin."""
+    reported_questions.json, ET envoie un message d'alerte instantané à
+    chaque admin (ADMIN_USER_IDS) sur Telegram."""
     query = update.callback_query
     try:
         _, token, type_key = query.data.split(":", 2)
@@ -758,6 +808,7 @@ async def handle_report_type(update: Update, context: ContextTypes.DEFAULT_TYPE)
         "correct_options": correct_texts,
     }
     await save_report(record)
+    await notify_admins_report(context, record)
 
     await query.answer("🚩 Merci, la question a été signalée pour relecture.", show_alert=True)
     await _edit_markup(query, build_question_button_markup(token), "edit_markup(report done)")
