@@ -23,7 +23,7 @@ services:
         value: "@qcMAX_batna"
       # IDs Telegram des admins, séparés par des virgules.
       - key: ADMIN_USER_IDS
-        value: "5696844039"
+        value: "5696844039,5435592397"
       # Correction des questions signalées directement depuis Telegram :
       # le bot commit le fichier data/*.json sur GitHub (disque Render temporaire).
       # Token GitHub avec « Contents: Read and write » sur ce dépôt, à saisir

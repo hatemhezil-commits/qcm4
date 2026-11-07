@@ -70,7 +70,7 @@ git push -u origin main
 |---|---|
 | `BOT_TOKEN` | التوكن الجديد من @BotFather (**إلزامي**) |
 | `REQUIRED_CHANNEL` | `@qcMAX_batna` (أو اتركه فارغًا لتعطيل شرط الاشتراك) |
-| `ADMIN_USER_IDS` | `5696844039` (عدة أرقام مفصولة بفواصل) |
+| `ADMIN_USER_IDS` | `5696844039,5435592397` (عدة أرقام مفصولة بفواصل) |
 | `WEBHOOK_SECRET` | يُولّده Render تلقائيًا (لا تلمسه) |
 
 `PORT` و`RENDER_EXTERNAL_URL` يضيفهما Render تلقائيًا.

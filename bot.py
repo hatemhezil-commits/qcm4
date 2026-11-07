@@ -177,7 +177,7 @@ GITHUB_BRANCH = (os.environ.get("GITHUB_BRANCH") or "main").strip()
 # /reports reste ouvert à tout le monde.
 # Peut être surchargé par la variable d'environnement ADMIN_USER_IDS
 # (IDs séparés par des virgules, ex. "123456789,987654321").
-DEFAULT_ADMIN_USER_IDS = "5696844039"
+DEFAULT_ADMIN_USER_IDS = "5696844039,5435592397"
 
 
 def _parse_admin_ids(raw: str) -> set[int]:
