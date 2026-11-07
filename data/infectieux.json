@@ -5866,20 +5866,6 @@
           ]
         },
         {
-          "question": "L'histoire naturelle de l'infection à VIH passe par trois phases. Voici quelques situations cliniques, préciser-la (les) quelle(s) est(sont) classante(s) ?",
-          "options": [
-            "Candidose œsophagienne",
-            "Dermite séborrhéique",
-            "Toxoplasmose",
-            "Pneumocystose"
-          ],
-          "correct_option_ids": [
-            0,
-            2,
-            3
-          ]
-        },
-        {
           "question": "Les progrès en matière de prise en charge thérapeutique de l'infection à VIH avancent à pas géants. Quel(s) est(sont) le(les) objectif(s) du traitement antirétroviral?",
           "options": [
             "Baisse de la charge virale",
