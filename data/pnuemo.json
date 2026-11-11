@@ -13518,8 +13518,11 @@
             "Cycloserine"
           ],
           "correct_option_ids": [
+            0,
             1,
-            3
+            2,
+            3,
+            4
           ]
         },
         {
