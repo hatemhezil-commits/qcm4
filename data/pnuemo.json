@@ -2911,7 +2911,9 @@
             "L'opacité peut contenir des calcifications",
             "Son pronostic est bon avec une longue espérance de vie"
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            1
+          ]
         },
         {
           "question": "Le syndrome de Claude-Bernard-Horner est caractérisé par :",
@@ -3397,14 +3399,18 @@
           ]
         },
         {
-          "question": "Parmi les marqueurs suivants quel est celui qui a une valeur pronostic dans le CBNPC :",
+          "question": "Parmi les techniques suivantes d’endoscopie interventionnelle, quelle est celle qui n’est pas indiquée dans le traitement palliatif des cancers bronchiques :",
           "options": [
             "Le lazer Yag",
             "La thermoplastie bronchique",
             "La photo chimiothérapie",
             "La prothèse endobronchique"
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
         },
         {
           "question": "Parmi les marqueurs suivants quel est celui qui a une valeur pronostic dans le CBNPC :",
@@ -4712,7 +4718,9 @@
             "Le filtre cave améliore vite la situation",
             "Il n'existe pas de contre-indications aux anticoagulants"
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            2
+          ]
         },
         {
           "question": "Devant une forte suspicion d'embolie pulmonaire, citer la (les) proposition(s) exacte(s).",
@@ -4736,7 +4744,9 @@
             "Réduit toujours le débit cardiaque",
             "Relève d'un traitement par AVK en continu"
           ],
-          "correct_option_ids": []
+          "correct_option_ids": [
+            2
+          ]
         },
         {
           "question": "Parmi les facteurs de risque d'embolie pulmonaire quels sont ceux qui sont acquis ?",
@@ -7952,7 +7962,8 @@
             "Kyste hydatique sain"
           ],
           "correct_option_ids": [
-            1
+            0,
+            2
           ]
         },
         {
@@ -9451,8 +9462,6 @@
           ],
           "correct_option_ids": [
             0,
-            1,
-            3,
             4
           ]
         }
@@ -9782,7 +9791,7 @@
           ],
           "correct_option_ids": [
             0,
-            2
+            4
           ]
         },
         {
@@ -13635,7 +13644,8 @@
             "toutes les réponses sont fausses"
           ],
           "correct_option_ids": [
-            3
+            1,
+            2
           ]
         },
         {
@@ -13661,7 +13671,8 @@
             "L'arrêt d'un antihypertenseur"
           ],
           "correct_option_ids": [
-            3
+            1,
+            2
           ]
         },
         {
@@ -13777,7 +13788,6 @@
             "Prise matin et soir"
           ],
           "correct_option_ids": [
-            1,
             2,
             3
           ]
@@ -13792,9 +13802,9 @@
             "Prise matin et soir"
           ],
           "correct_option_ids": [
-            1,
+            0,
             2,
-            4
+            3
           ]
         }
       ],
