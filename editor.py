@@ -201,11 +201,13 @@ def _stash_local_changes(log):
     """يحفظ كل التعديلات المحلية (بما فيها الملفات غير المتتبَّعة) مؤقتًا.
     يرجع True إذا وُجد شيء تم حفظه."""
     code, out = run_git("stash", "push", "-u", "-m", "editor-autosync")
-    if code == 0 and "No local changes" not in out:
-        log.append("📦 حفظت تعديلاتك المحلية مؤقتًا.")
-        return True
-    log.append("⚠️ لم أتمكن من حفظ التعديلات المحلية.")
-    return False
+    if code != 0:
+        log.append("⚠️ لم أتمكن من حفظ التعديلات المحلية.")
+        return False
+    if not out or "No local changes" in out:
+        return False
+    log.append("📦 حفظت تعديلاتك المحلية مؤقتًا.")
+    return True
 
 
 def sync_from_github():
@@ -578,6 +580,26 @@ def api_push():
         run_git("rebase", "--abort")
         if stashed:
             run_git("stash", "pop")
+        low = (out or "").lower()
+        network = any(
+            marker in low
+            for marker in (
+                "unable to access",
+                "could not resolve",
+                "failed to connect",
+                "connection timed out",
+                "couldn't connect",
+                "connection reset",
+            )
+        )
+        if network:
+            return jsonify({
+                "error": (
+                    "تعذّر الاتصال بـ GitHub أثناء المزامنة.\n"
+                    "✅ تعديلك محفوظ في commit محلي — اضغط «🚀 رفع» مرة أخرى."
+                ),
+                "log": log + [out],
+            }), 502
         log.append("⚠️ تعارض مع تعديلات GitHub (من البوت مثلًا).")
         return jsonify({
             "error": "تعارض: حُفظ تعديلك في commit محلي. لن يُرفع شيء حتى تُحلّ المشكلة.",

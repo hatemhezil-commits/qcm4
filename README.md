@@ -73,3 +73,24 @@ Deux façons, au choix :
 
 Les deux outils font un `git pull --rebase` avant l'envoi, pour conserver les
 corrections faites depuis Telegram (boutons du message de signalement).
+
+**Savoir si c'est vraiment publié** — la barre d'état de l'éditeur ne dit
+jamais « ✔ محدّث » à tort :
+
+| Affichage | Signification |
+|---|---|
+| ⬆️ *N* تعديل غير مرفوع | *N* commits locaux **pas encore sur GitHub** → appuyer sur 🚀 رفع |
+| ● *N* ملف معدّل غير مرفوع | fichiers modifiés pas encore commités |
+| ⬇️ *N* تحديث على GitHub | corrections faites depuis Telegram → ⬇️ تحديث |
+| ⚠️ تعذّر التحقق من GitHub | réseau coupé, état inconnu (réessayer) |
+
+En cas d'échec du bouton 🚀 رفع, le message distingue deux cas :
+
+- **réseau** (HTTP 502) : rien n'est perdu, le commit local reste en attente →
+  réappuyer sur 🚀 رفع plus tard ;
+- **conflit** (HTTP 409) : le bot a modifié la même zone ; l'éditeur annule son
+  rebase et conserve le commit local → faire ⬇️ تحديث puis refaire la
+  modification.
+
+Le dépôt distant doit toujours revenir à `0 0` pour
+`git rev-list --left-right --count HEAD...origin/main`.
