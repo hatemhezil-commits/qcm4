@@ -21,10 +21,12 @@ import json
 import os
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import threading
 import time
+import urllib.request
 import webbrowser
 
 from flask import Flask, jsonify, render_template_string, request
@@ -1102,6 +1104,23 @@ def index():
     return render_template_string(PAGE)
 
 
+def _port_busy(port):
+    """هل هناك برنامج يستمع على هذا المنفذ؟"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(0.5)
+        return s.connect_ex(("127.0.0.1", port)) == 0
+
+
+def _is_our_editor(port, timeout=3):
+    """هل الخدمة على هذا المنفذ هي محرّر الأسئلة نفسه؟"""
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/status", timeout=timeout) as r:
+            data = json.loads(r.read().decode("utf-8", "replace"))
+        return isinstance(data, dict) and "changed" in data and "last_commit" in data
+    except Exception:
+        return False
+
+
 def main():
     global DATA_DIR
     parser = argparse.ArgumentParser(description="محرر أسئلة QCM محلي")
@@ -1118,11 +1137,35 @@ def main():
         print(f"❌ المجلد غير موجود: {DATA_DIR}")
         return 1
 
+    # --- المنفذ: نتحقق قبل تشغيل الخادم حتى لا تنهار النافذة ---
+    port = args.port
+    if _port_busy(port):
+        if _is_our_editor(port):
+            url = f"http://127.0.0.1:{port}"
+            print("✅ المحرر يعمل بالفعل — فتحت المتصفح على:")
+            print(f"   {url}")
+            print("   (أغلق نافذة المحرر القديمة أولًا إن أردت إعادة التشغيل)")
+            if not args.no_browser:
+                try:
+                    webbrowser.open(url)
+                except Exception:
+                    pass
+            time.sleep(3)
+            return 0
+        for candidate in range(port + 1, port + 11):
+            if not _port_busy(candidate):
+                print(f"⚠️ المنفذ {port} مستعمل من برنامج آخر — سأستخدم {candidate}.")
+                port = candidate
+                break
+        else:
+            print(f"❌ كل المنافذ من {args.port} إلى {args.port + 10} مستعملة.")
+            return 1
+
     if not args.no_sync and not args.data_dir:
         print("🔄 جلب آخر نسخة من GitHub في الخلفية…")
         start_background_sync()
 
-    url = f"http://127.0.0.1:{args.port}"
+    url = f"http://127.0.0.1:{port}"
     print("=" * 52)
     print("📚 محرر أسئلة QCM")
     print(f"   {url}")
@@ -1136,7 +1179,7 @@ def main():
         except Exception:
             pass
 
-    app.run(host="127.0.0.1", port=args.port, debug=False, threaded=True)
+    app.run(host="127.0.0.1", port=port, debug=False, threaded=True)
     return 0
 
 
