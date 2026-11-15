@@ -557,7 +557,13 @@ def api_push():
                 log.append(f"❌ {rel}: {len(errors)} مشكلة")
                 log.extend("   • " + e for e in errors[:8])
         if has_errors:
-            return jsonify({"error": "الملفات فيها أخطاء، لم يتم الرفع.", "log": log}), 400
+            return jsonify({
+                "error": (
+                    "لم يُرفع شيء: ملفات الأسئلة فيها أخطاء. "
+                    "صحّح الأسئلة المذكورة أدناه ثم اضغط «🚀 رفع» من جديد."
+                ),
+                "log": log,
+            }), 400
 
         log.append("✅ التحقق سليم")
         code, out = run_git("add", "--", *changed)
@@ -602,7 +608,10 @@ def api_push():
             }), 502
         log.append("⚠️ تعارض مع تعديلات GitHub (من البوت مثلًا).")
         return jsonify({
-            "error": "تعارض: حُفظ تعديلك في commit محلي. لن يُرفع شيء حتى تُحلّ المشكلة.",
+            "error": (
+                "تعارض: البوت عدّل نفس السؤال. لم يُرفع شيء.\n"
+                "اضغط «⬇️ تحديث» ثم أعد التعديل."
+            ),
             "log": log + [out],
         }), 409
     if out:
@@ -723,6 +732,17 @@ PAGE = """<!doctype html>
          transition:opacity .2s;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.4)}
   #toast.show{opacity:1}
   #toast.ok{border-color:var(--ok)} #toast.bad{border-color:var(--bad)}
+  /* panneau d'erreur persistant (reste affiche jusqu'a fermeture) */
+  #errBox{position:fixed;bottom:22px;right:50%;transform:translateX(50%);background:#2a1d24;
+          border:1px solid var(--bad);border-radius:10px;padding:12px 16px;font-size:13px;
+          width:min(720px,92vw);max-height:46vh;display:flex;flex-direction:column;gap:8px;
+          z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  #errBox.hidden{display:none}
+  .err-head{display:flex;align-items:center;gap:10px}
+  .err-head strong{flex:1;color:#ff9a9a;font-size:13px}
+  #errBody{margin:0;overflow:auto;white-space:pre-wrap;line-height:1.6;
+           font-family:inherit;font-size:12.5px;color:#ffd9d9}
+  #errBox button{padding:3px 9px;font-size:12px;background:#3a2a33;color:#ffd9d9}
   mark{background:#5b8cff55;color:inherit;border-radius:3px;padding:0 2px}
   @media(max-width:820px){
     aside{display:none}
@@ -778,6 +798,15 @@ PAGE = """<!doctype html>
   </div>
 </div>
 
+<div id="errBox" class="hidden">
+  <div class="err-head">
+    <strong id="errTitle">خطأ</strong>
+    <button id="errCopy" class="ghost" title="نسخ التفاصيل">📋</button>
+    <button id="errClose" class="ghost" title="إغلاق">✕</button>
+  </div>
+  <pre id="errBody"></pre>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -801,6 +830,20 @@ function toast(msg, kind){
   clearTimeout(el._t);
   el._t = setTimeout(() => { el.className = ""; }, 4200);
 }
+function showError(title, lines){
+  $("errTitle").textContent = title;
+  $("errBody").textContent = (lines || []).filter(x => x !== null && x !== undefined && String(x).trim()).join("\\n");
+  $("errBox").classList.remove("hidden");
+}
+function hideError(){ $("errBox").classList.add("hidden"); }
+$("errClose").onclick = hideError;
+$("errCopy").onclick = () => {
+  const txt = $("errTitle").textContent + "\\n" + $("errBody").textContent;
+  navigator.clipboard.writeText(txt).then(
+    () => toast("نُسخت التفاصيل", "ok"),
+    () => toast("تعذّر النسخ", "bad")
+  );
+};
 
 async function api(url, opts){
   const r = await fetch(url, opts);
@@ -809,6 +852,7 @@ async function api(url, opts){
   if(!r.ok){
     const msg = (data && (data.error || data.message)) || ("HTTP " + r.status);
     const err = new Error(msg);
+    err.status = r.status;
     err.log = data && data.log;
     throw err;
   }
@@ -1114,7 +1158,7 @@ async function pullFromGithub(){
     } catch(e2){}
     refreshStatus();
   } catch(e){
-    toast(e.message + ((e.log && e.log.length) ? "\\n" + e.log.join("\\n") : ""), "bad");
+    showError("تعذّر التحديث من GitHub (HTTP " + (e.status || "?") + ")", [e.message].concat(e.log || []));
   } finally {
     $("pullBtn").disabled = false;
     $("pullBtn").textContent = label;
@@ -1123,14 +1167,21 @@ async function pullFromGithub(){
 
 async function pushChanges(){
   if(!confirm("رفع ملفات الأسئلة المعدّلة إلى GitHub؟\\n(سيعيد Render النشر تلقائيًا)")) return;
+  hideError();
   $("pushBtn").disabled = true;
   $("pushBtn").textContent = "⏳ جاري الرفع…";
   try {
     const res = await api("/api/push", { method: "POST" });
-    toast((res.log || []).join("\\n") || "تم الرفع", "ok");
+    const lines = (res.log || []).filter(l => l && !l.startsWith("Current branch"));
+    toast("تم الرفع\\n" + (lines.pop() || ""), "ok");
     refreshStatus();
   } catch(e){
-    toast(e.message + ((e.log && e.log.length) ? "\\n" + e.log.join("\\n") : ""), "bad");
+    const title = e.status === 400 ? "لم يُرفع شيء — أخطاء في الأسئلة"
+                : e.status === 409 ? "لم يُرفع شيء — تعارض مع تعديلات GitHub"
+                : e.status === 502 ? "لم يُرفع شيء — تعذّر الاتصال بـ GitHub"
+                : "لم يُرفع شيء";
+    showError(title + " (HTTP " + (e.status || "?") + ")", [e.message].concat(e.log || []));
+    refreshStatus();
   } finally {
     $("pushBtn").disabled = false;
     $("pushBtn").textContent = "🚀 رفع إلى GitHub";
