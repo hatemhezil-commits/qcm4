@@ -62,11 +62,12 @@ Deux façons, au choix :
    - modifier / ajouter / supprimer, avec validation immédiate ;
    - bouton **🚀 رفع إلى GitHub** pour publier (Render redéploie tout seul).
    - sauvegarde automatique des fichiers dans `backups/` avant chaque écriture.
-  - **synchronisation GitHub** : au démarrage, l'éditeur récupère la dernière
-    version de `main` (donc les corrections faites depuis Telegram) ; bouton
-    **⬇️ تحديث** pour la refaire à tout moment. Les modifications locales non
-    publiées sont mises de côté (`git stash`) puis réappliquées, jamais perdues.
-    Option `--no-sync` pour démarrer sans synchroniser.
+  - **synchronisation GitHub** : au démarrage, l'éditeur récupère en arrière-plan
+    la dernière version de `main` (donc les corrections faites depuis Telegram) —
+    l'interface s'ouvre tout de suite, même si le réseau est lent ou coupé ;
+    bouton **⬇️ تحديث** pour la refaire à tout moment. Les modifications locales
+    non publiées sont mises de côté (`git stash`) puis réappliquées, jamais
+    perdues. Option `--no-sync` pour démarrer sans synchroniser.
 2. **Édition directe du JSON** : modifier `data/*.json`, puis double-cliquer sur
    `push_qcm.bat` (validation + commit + push).
 

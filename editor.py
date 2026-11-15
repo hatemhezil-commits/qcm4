@@ -23,6 +23,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
 import webbrowser
 
@@ -160,15 +161,20 @@ def clean_question(q):
 # ============================ Git ============================
 
 def run_git(*args, timeout=180):
-    result = subprocess.run(
-        ["git", "-c", "core.quotepath=false", *args],
-        cwd=BASE_DIR,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=timeout,
-    )
+    try:
+        result = subprocess.run(
+            ["git", "-c", "core.quotepath=false", *args],
+            cwd=BASE_DIR,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        return 1, f"⏱️ انتهت المهلة ({timeout}s) أثناء: git {' '.join(args)}"
+    except OSError as e:
+        return 1, f"تعذّر تشغيل git: {e}"
     # Ne PAS strip() ici : `git status --porcelain` commence par un espace
     # significatif (« M fichier ») qu'il ne faut pas perdre.
     return result.returncode, (result.stdout or "") + (result.stderr or "")
@@ -206,12 +212,12 @@ def sync_from_github():
     log = []
 
     code, out = 1, ""
-    for attempt in range(3):
-        code, out = run_git("fetch", "origin", timeout=90)
+    for attempt in range(2):
+        code, out = run_git("fetch", "origin", timeout=25)
         if code == 0:
             break
-        if attempt < 2:
-            log.append(f"↻ محاولة {attempt + 2}/3 للاتصال بـ GitHub…")
+        if attempt == 0:
+            log.append("↻ محاولة ثانية للاتصال بـ GitHub…")
             time.sleep(2)
     if code != 0:
         return {"ok": False, "error": "تعذّر الاتصال بـ GitHub", "log": log + [out.strip()]}
@@ -255,31 +261,64 @@ def sync_from_github():
     return {"ok": True, "updated": behind, "log": log}
 
 
-_last_fetch_ts = 0.0
-_last_fetch_ok = True
+_behind_state = {"value": None, "checked_at": 0.0, "checking": False, "error": False}
 
 
-def remote_behind():
-    """عدد الـ commits التي على GitHub وليست عندك.
-    None إذا تعذّر الاتصال (المعلومات غير موثوقة).
-    لا يجلب أكثر من مرة كل 60 ثانية."""
-    global _last_fetch_ts, _last_fetch_ok
-    now = time.time()
-    if now - _last_fetch_ts > 60:
-        # On note la tentative même en cas d'échec, pour ne pas bloquer
-        # l'interface à chaque appel quand le réseau est coupé.
-        _last_fetch_ts = now
-        code, _ = run_git("fetch", "origin", timeout=8)
-        _last_fetch_ok = (code == 0)
-    if not _last_fetch_ok:
-        return None
-    code, out = run_git("rev-list", "--count", "HEAD..origin/main")
-    if code != 0:
-        return None
+def start_behind_check(force=False):
+    """يتحقق من عدد التحديثات على GitHub في الخلفية (لا يُجمّد الواجهة أبدًا)."""
+    st = _behind_state
+    if st["checking"]:
+        return
+    if not force and time.time() - st["checked_at"] < 60:
+        return
+
+    def worker():
+        st["checking"] = True
+        try:
+            code, _ = run_git("fetch", "origin", timeout=8)
+            st["error"] = (code != 0)
+            st["value"] = None
+            if code == 0:
+                code2, out = run_git("rev-list", "--count", "HEAD..origin/main")
+                if code2 == 0:
+                    try:
+                        st["value"] = int((out or "0").strip() or 0)
+                    except ValueError:
+                        st["error"] = True
+                else:
+                    st["error"] = True
+            st["checked_at"] = time.time()
+        finally:
+            st["checking"] = False
+
+    threading.Thread(target=worker, daemon=True).start()
+
+
+# --- état de la synchronisation (lancée en arrière-plan au démarrage) ---
+_sync_lock = threading.Lock()
+_sync_state = {"running": False, "result": None, "seq": 0}
+
+
+def run_sync():
+    """ينفّذ المزامنة مع قفل يمنع عمليتين في آن واحد."""
+    if not _sync_lock.acquire(blocking=False):
+        return {"ok": False, "error": "هناك تحديث جارٍ بالفعل…", "log": []}
+    _sync_state["running"] = True
     try:
-        return int((out or "0").strip() or 0)
-    except ValueError:
-        return None
+        result = sync_from_github()
+    except Exception as e:  # noqa: BLE001 - on ne casse jamais l'éditeur
+        result = {"ok": False, "error": f"خطأ غير متوقّع: {e}", "log": []}
+    finally:
+        _sync_state["running"] = False
+        _sync_lock.release()
+    _sync_state["result"] = result
+    _sync_state["seq"] += 1
+    return result
+
+
+def start_background_sync():
+    """يجلب نسخة GitHub في الخلفية حتى لا يتأخّر تشغيل الواجهة."""
+    threading.Thread(target=run_sync, daemon=True).start()
 
 
 def validate_disk_file(rel_path):
@@ -451,18 +490,28 @@ def api_search():
 def api_status():
     changed = changed_data_files()
     _, last = run_git("log", "-1", "--pretty=%h %s")
+    syncing = _sync_state["running"]
+    if not syncing:
+        start_behind_check()
     return jsonify({
         "changed": changed,
         "last_commit": last.strip(),
-        "behind": remote_behind(),
+        # inutile (et lent) de vérifier « behind » pendant une synchro en cours
+        "behind": _behind_state["value"],
+        "checking": _behind_state["checking"],
+        "behind_error": _behind_state["error"],
+        "syncing": syncing,
+        "sync": (
+            {**_sync_state["result"], "seq": _sync_state["seq"]}
+            if _sync_state["result"] else None
+        ),
     })
 
 
 @app.post("/api/pull")
 def api_pull():
-    global _last_fetch_ts
-    _last_fetch_ts = 0.0  # force un nouveau contrôle au prochain /api/status
-    result = sync_from_github()
+    result = run_sync()
+    start_behind_check(force=True)
     if not result.get("ok"):
         return jsonify(result), 409
     return jsonify(result)
@@ -519,6 +568,7 @@ def api_push():
         return jsonify({"error": out or "git push فشل", "log": log}), 500
 
     log.append("🎉 تم الرفع — Render سيعيد النشر تلقائيًا (1–3 دقائق).")
+    start_behind_check(force=True)
     return jsonify({"ok": True, "log": log})
 
 
@@ -918,11 +968,43 @@ async function openResult(r){
   card?.animate([{outline: "2px solid #5b8cff"}, {outline: "2px solid transparent"}], {duration: 1600});
 }
 
+let lastSyncSeq = 0;
+let syncingPoll = null;
+
 async function refreshStatus(){
   try {
     const s = await api("/api/status");
+
+    // résumé de la synchronisation lancée en arrière-plan / manuelle
+    if(s.sync && s.sync.seq !== lastSyncSeq){
+      lastSyncSeq = s.sync.seq;
+      const log = (s.sync.log || []).join("\\n");
+      if(s.sync.ok){
+        if(s.sync.updated > 0){
+          toast(log || "تم التحديث", "ok");
+          if($("overlay").classList.contains("hidden")){
+            await loadModules();
+            if(state.file){ await loadLeaves(); }
+          }
+        }
+      } else {
+        toast((s.sync.error || "تعذّر التحديث") + (log ? "\\n" + log : ""), "bad");
+      }
+    }
+
+    if(s.syncing || s.checking){
+      $("status").textContent = s.syncing
+        ? "⏳ جاري جلب آخر نسخة من GitHub…"
+        : "⏳ التحقق من GitHub…";
+      $("status").style.color = "#9db4ff";
+      $("status").title = "";
+      clearTimeout(syncingPoll);
+      syncingPoll = setTimeout(refreshStatus, 1500);
+      return;
+    }
+
     const parts = [];
-    if(s.behind === null || s.behind === undefined){
+    if(s.behind_error){
       parts.push("⚠️ تعذّر التحقق من GitHub");
     } else if(s.behind > 0){
       parts.push(`⬇️ ${s.behind} تحديث على GitHub`);
@@ -932,12 +1014,12 @@ async function refreshStatus(){
     }
     $("status").textContent = parts.join(" • ") || "✔ محدّث";
     let color = "#7ee2a8";
-    if(s.behind === null || s.behind === undefined) color = "#ff9a9a";
+    if(s.behind_error) color = "#ff9a9a";
     else if(s.behind > 0) color = "#9db4ff";
     else if(s.changed.length) color = "#ffd166";
     $("status").style.color = color;
     $("status").title = s.last_commit || "";
-    $("pullBtn").classList.toggle("primary", !(s.behind === 0));
+    $("pullBtn").classList.toggle("primary", !(s.behind === 0 && !s.behind_error));
   } catch(e){}
 }
 
@@ -950,6 +1032,11 @@ async function pullFromGithub(){
     toast((res.log || []).join("\\n") || "تم التحديث", "ok");
     await loadModules();
     if(state.file){ await loadLeaves(); }
+    // évite de réafficher deux fois le même résumé de synchronisation
+    try {
+      const st = await api("/api/status");
+      if(st.sync){ lastSyncSeq = st.sync.seq; }
+    } catch(e2){}
     refreshStatus();
   } catch(e){
     toast(e.message + ((e.log && e.log.length) ? "\\n" + e.log.join("\\n") : ""), "bad");
@@ -1032,13 +1119,8 @@ def main():
         return 1
 
     if not args.no_sync and not args.data_dir:
-        print("🔄 التحقق من آخر نسخة على GitHub…")
-        result = sync_from_github()
-        for line in result.get("log", []):
-            print("   " + line)
-        if not result.get("ok"):
-            print("   ⚠️ " + str(result.get("error") or "فشل التحديث"))
-            print("   (سيعمل المحرر على النسخة الحالية على أي حال)")
+        print("🔄 جلب آخر نسخة من GitHub في الخلفية…")
+        start_background_sync()
 
     url = f"http://127.0.0.1:{args.port}"
     print("=" * 52)
