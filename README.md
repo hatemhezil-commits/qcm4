@@ -84,13 +84,37 @@ jamais « ✔ محدّث » à tort :
 | ⬇️ *N* تحديث على GitHub | corrections faites depuis Telegram → ⬇️ تحديث |
 | ⚠️ تعذّر التحقق من GitHub | réseau coupé, état inconnu (réessayer) |
 
-En cas d'échec du bouton 🚀 رفع, le message distingue deux cas :
+En cas d'échec du bouton 🚀 رفع, le message distingue trois cas :
 
 - **réseau** (HTTP 502) : rien n'est perdu, le commit local reste en attente →
   réappuyer sur 🚀 رفع plus tard ;
+- **permissions** (HTTP 403) : GitHub a refusé le jeton (souvent parce que
+  Windows a proposé un autre compte que `hatemhezil-commits`) → voir la section
+  « Authentification GitHub » ci-dessous ;
 - **conflit** (HTTP 409) : le bot a modifié la même zone ; l'éditeur annule son
   rebase et conserve le commit local → faire ⬇️ تحديث puis refaire la
   modification.
 
 Le dépôt distant doit toujours revenir à `0 0` pour
 `git rev-list --left-right --count HEAD...origin/main`.
+
+## Authentification GitHub (éditeur local)
+
+Le dossier `bot4` envoie vers GitHub avec un **jeton personnel placé dans l'URL
+du dépôt distant**. C'est ce qui évite les erreurs du type :
+
+```
+remote: Permission to hatemhezil-commits/qcm4.git denied to <autre-compte>.
+fatal: ... The requested URL returned error: 403
+```
+
+Si ce message apparaît, Git a utilisé les identifiants enregistrés dans Windows
+(Git Credential Manager) au lieu du jeton. Remettre l'URL avec le jeton :
+
+```bat
+git remote set-url origin https://<TOKEN>@github.com/hatemhezil-commits/qcm4.git
+git push origin main
+```
+
+Vérifier ensuite que `git rev-list --left-right --count HEAD...origin/main`
+affiche `0 0`. Le jeton reste uniquement dans `.git/config` (jamais commité).
