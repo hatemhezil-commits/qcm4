@@ -266,6 +266,17 @@ def sync_from_github():
 _behind_state = {"value": None, "checked_at": 0.0, "checking": False, "error": False}
 
 
+def unpushed_commits():
+    """عدد الـ commits المحلية التي لم تصل إلى GitHub بعد."""
+    code, out = run_git("rev-list", "--count", "origin/main..HEAD")
+    if code != 0:
+        return 0
+    try:
+        return int((out or "0").strip() or 0)
+    except ValueError:
+        return 0
+
+
 def start_behind_check(force=False):
     """يتحقق من عدد التحديثات على GitHub في الخلفية (لا يُجمّد الواجهة أبدًا)."""
     st = _behind_state
@@ -497,6 +508,7 @@ def api_status():
         start_behind_check()
     return jsonify({
         "changed": changed,
+        "ahead": unpushed_commits(),
         "last_commit": last.strip(),
         # inutile (et lent) de vérifier « behind » pendant une synchro en cours
         "behind": _behind_state["value"],
@@ -529,34 +541,43 @@ def api_push():
         return jsonify({"error": "المجلد ليس على فرع Git صالح"}), 400
 
     changed = changed_data_files()
-    if not changed:
+    pending = unpushed_commits()
+    if not changed and pending == 0:
         return jsonify({"ok": True, "log": ["✅ لا توجد تغييرات في ملفات الأسئلة."]})
 
-    log.append("📄 الملفات: " + ", ".join(changed))
-    has_errors = False
-    for rel in changed:
-        errors = validate_disk_file(rel)
-        if errors:
-            has_errors = True
-            log.append(f"❌ {rel}: {len(errors)} مشكلة")
-            log.extend("   • " + e for e in errors[:8])
-    if has_errors:
-        return jsonify({"error": "الملفات فيها أخطاء، لم يتم الرفع.", "log": log}), 400
+    if changed:
+        log.append("📄 الملفات: " + ", ".join(changed))
+        has_errors = False
+        for rel in changed:
+            errors = validate_disk_file(rel)
+            if errors:
+                has_errors = True
+                log.append(f"❌ {rel}: {len(errors)} مشكلة")
+                log.extend("   • " + e for e in errors[:8])
+        if has_errors:
+            return jsonify({"error": "الملفات فيها أخطاء، لم يتم الرفع.", "log": log}), 400
 
-    log.append("✅ التحقق سليم")
-    code, out = run_git("add", "--", *changed)
-    if code != 0:
-        return jsonify({"error": out or "git add فشل", "log": log}), 500
+        log.append("✅ التحقق سليم")
+        code, out = run_git("add", "--", *changed)
+        if code != 0:
+            return jsonify({"error": out or "git add فشل", "log": log}), 500
 
-    message = f"Mise à jour des QCM — {time.strftime('%d/%m/%Y %H:%M')}"
-    code, out = run_git("commit", "-m", message, "--", *changed)
-    if code != 0:
-        return jsonify({"error": out or "git commit فشل", "log": log}), 500
-    log.append("✅ " + message)
+        message = f"Mise à jour des QCM — {time.strftime('%d/%m/%Y %H:%M')}"
+        code, out = run_git("commit", "-m", message, "--", *changed)
+        if code != 0:
+            return jsonify({"error": out or "git commit فشل", "log": log}), 500
+        log.append("✅ " + message)
+    else:
+        log.append(f"⬆️ {pending} تعديل محفوظ محليًا في انتظار الرفع.")
+
+    # بقايا تعديلات غير مرفوعة (ملفات أخرى) تُعطّل pull --rebase → نحفظها مؤقتًا
+    stashed = _stash_local_changes(log)
 
     code, out = run_git("pull", "--rebase", "origin", branch)
     if code != 0:
         run_git("rebase", "--abort")
+        if stashed:
+            run_git("stash", "pop")
         log.append("⚠️ تعارض مع تعديلات GitHub (من البوت مثلًا).")
         return jsonify({
             "error": "تعارض: حُفظ تعديلك في commit محلي. لن يُرفع شيء حتى تُحلّ المشكلة.",
@@ -565,12 +586,39 @@ def api_push():
     if out:
         log.append(out)
 
-    code, out = run_git("push", "origin", branch)
+    # الرفع: نعيد المحاولة تلقائيًا (الشبكة تنقطع أحيانًا لثوانٍ)
+    code, out = 1, ""
+    for attempt in range(3):
+        code, out = run_git("push", "origin", branch, timeout=120)
+        if code == 0:
+            break
+        if attempt < 2:
+            log.append(f"↻ إعادة محاولة الرفع ({attempt + 2}/3)…")
+            time.sleep(3)
+
+    pop_failed = False
+    if stashed:
+        code_pop, out_pop = run_git("stash", "pop")
+        if code_pop != 0:
+            run_git("reset", "--hard", "HEAD")
+            pop_failed = True
+            log.append("⚠️ تعارض بين تعديلاتك الأخرى ونسخة GitHub (محفوظة في stash).")
+        else:
+            log.append("✅ أعدت تعديلاتك الأخرى غير المرفوعة.")
+
     if code != 0:
-        return jsonify({"error": out or "git push فشل", "log": log}), 500
+        return jsonify({
+            "error": (
+                "تعذّر الرفع إلى GitHub (مشكلة شبكة).\n"
+                "✅ تعديلك محفوظ في commit محلي — اضغط «🚀 رفع» مرة أخرى لإكمال الرفع."
+            ),
+            "log": log + [out],
+        }), 502
 
     log.append("🎉 تم الرفع — Render سيعيد النشر تلقائيًا (1–3 دقائق).")
     start_behind_check(force=True)
+    if pop_failed:
+        return jsonify({"ok": True, "pop_failed": True, "log": log})
     return jsonify({"ok": True, "log": log})
 
 
@@ -1011,12 +1059,15 @@ async function refreshStatus(){
     } else if(s.behind > 0){
       parts.push(`⬇️ ${s.behind} تحديث على GitHub`);
     }
-    if(s.changed.length){
+    if(s.ahead > 0){
+      parts.push(`⬆️ ${s.ahead} تعديل غير مرفوع — اضغط رفع`);
+    } else if(s.changed.length){
       parts.push(`● ${s.changed.length} ملف معدّل غير مرفوع`);
     }
     $("status").textContent = parts.join(" • ") || "✔ محدّث";
     let color = "#7ee2a8";
     if(s.behind_error) color = "#ff9a9a";
+    else if(s.ahead > 0) color = "#ff9a9a";
     else if(s.behind > 0) color = "#9db4ff";
     else if(s.changed.length) color = "#ffd166";
     $("status").style.color = color;
