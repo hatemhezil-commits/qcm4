@@ -189,6 +189,86 @@ def changed_data_files():
     return sorted(set(files))
 
 
+def _stash_local_changes(log):
+    """يحفظ كل التعديلات المحلية (بما فيها الملفات غير المتتبَّعة) مؤقتًا.
+    يرجع True إذا وُجد شيء تم حفظه."""
+    code, out = run_git("stash", "push", "-u", "-m", "editor-autosync")
+    if code == 0 and "No local changes" not in out:
+        log.append("📦 حفظت تعديلاتك المحلية مؤقتًا.")
+        return True
+    log.append("⚠️ لم أتمكن من حفظ التعديلات المحلية.")
+    return False
+
+
+def sync_from_github():
+    """يجلب آخر نسخة من GitHub ويطبّقها، مع الحفاظ على التعديلات المحلية.
+    يرجع dict فيه ok / updated / log / error."""
+    log = []
+
+    code, out = run_git("fetch", "origin", timeout=90)
+    if code != 0:
+        return {"ok": False, "error": "تعذّر الاتصال بـ GitHub", "log": log + [out.strip()]}
+
+    code, out = run_git("rev-list", "--count", "HEAD..origin/main")
+    if code != 0:
+        return {"ok": False, "error": "تعذّر قراءة حالة الفرع origin/main", "log": log + [out.strip()]}
+    behind = int((out or "0").strip() or 0)
+    if behind == 0:
+        return {"ok": True, "updated": 0, "log": ["✅ أنت على آخر نسخة من GitHub."]}
+
+    stashed = _stash_local_changes(log)
+
+    code, out = run_git("pull", "--rebase", "origin", "main")
+    if code != 0:
+        run_git("rebase", "--abort")
+        if stashed:
+            run_git("stash", "pop")
+        return {
+            "ok": False,
+            "error": "تعارض أثناء تحديث الملفات من GitHub.",
+            "log": log + [out.strip()],
+        }
+    log.append(f"⬇️ تم جلب {behind} تحديث من GitHub.")
+
+    if stashed:
+        code, out = run_git("stash", "pop")
+        if code != 0:
+            # Conflit : on enlève les marqueurs, le stash reste intact.
+            run_git("reset", "--hard", "HEAD")
+            return {
+                "ok": False,
+                "error": (
+                    "تعارض بين تعديلاتك المحلية ونسخة GitHub.\n"
+                    "تعديلاتك محفوظة في stash (أمر: git stash list)."
+                ),
+                "log": log + [out.strip()],
+            }
+        log.append("✅ أعدت تعديلاتك المحلية غير المرفوعة.")
+
+    return {"ok": True, "updated": behind, "log": log}
+
+
+_last_fetch_ts = 0.0
+
+
+def remote_behind():
+    """عدد الـ commits التي على GitHub وليست عندك (None إذا تعذّر الاتصال).
+    لا يجلب أكثر من مرة كل 60 ثانية."""
+    global _last_fetch_ts
+    now = time.time()
+    if now - _last_fetch_ts > 60:
+        code, _ = run_git("fetch", "origin", timeout=20)
+        if code == 0:
+            _last_fetch_ts = now
+    code, out = run_git("rev-list", "--count", "HEAD..origin/main")
+    if code != 0:
+        return None
+    try:
+        return int((out or "0").strip() or 0)
+    except ValueError:
+        return None
+
+
 def validate_disk_file(rel_path):
     full = os.path.join(BASE_DIR, rel_path)
     try:
@@ -361,8 +441,16 @@ def api_status():
     return jsonify({
         "changed": changed,
         "last_commit": last.strip(),
-        "backups_dir": os.path.isdir(BACKUP_DIR),
+        "behind": remote_behind(),
     })
+
+
+@app.post("/api/pull")
+def api_pull():
+    result = sync_from_github()
+    if not result.get("ok"):
+        return jsonify(result), 409
+    return jsonify(result)
 
 
 @app.post("/api/push")
@@ -512,6 +600,7 @@ PAGE = """<!doctype html>
   <input id="searchInput" placeholder="🔎 ابحث في كل الأسئلة…">
   <span class="status" id="status"></span>
   <div class="spacer"></div>
+  <button id="pullBtn" title="جلب آخر التعديلات من GitHub">⬇️ تحديث</button>
   <button id="refreshBtn" title="تحديث">↻</button>
   <button id="pushBtn" class="primary">🚀 رفع إلى GitHub</button>
 </header>
@@ -817,12 +906,36 @@ async function openResult(r){
 async function refreshStatus(){
   try {
     const s = await api("/api/status");
-    $("status").textContent = s.changed.length
-      ? `● ${s.changed.length} ملف معدّل غير مرفوع`
-      : "✔ لا توجد تغييرات غير مرفوعة";
-    $("status").style.color = s.changed.length ? "#ffd166" : "#7ee2a8";
+    const parts = [];
+    if(typeof s.behind === "number" && s.behind > 0){
+      parts.push(`⬇️ ${s.behind} تحديث على GitHub`);
+    }
+    if(s.changed.length){
+      parts.push(`● ${s.changed.length} ملف معدّل غير مرفوع`);
+    }
+    $("status").textContent = parts.join(" • ") || "✔ محدّث";
+    $("status").style.color = (s.behind > 0) ? "#9db4ff" : (s.changed.length ? "#ffd166" : "#7ee2a8");
     $("status").title = s.last_commit || "";
+    $("pullBtn").classList.toggle("primary", s.behind > 0);
   } catch(e){}
+}
+
+async function pullFromGithub(){
+  $("pullBtn").disabled = true;
+  const label = $("pullBtn").textContent;
+  $("pullBtn").textContent = "⏳…";
+  try {
+    const res = await api("/api/pull", { method: "POST" });
+    toast((res.log || []).join("\\n") || "تم التحديث", "ok");
+    await loadModules();
+    if(state.file){ await loadLeaves(); }
+    refreshStatus();
+  } catch(e){
+    toast(e.message + ((e.log && e.log.length) ? "\\n" + e.log.join("\\n") : ""), "bad");
+  } finally {
+    $("pullBtn").disabled = false;
+    $("pullBtn").textContent = label;
+  }
 }
 
 async function pushChanges(){
@@ -861,6 +974,7 @@ $("addOptionBtn").onclick = () => {
   relabel();
 };
 $("pushBtn").onclick = pushChanges;
+$("pullBtn").onclick = pullFromGithub;
 $("searchInput").oninput = () => {
   clearTimeout(state.searchTimer);
   state.searchTimer = setTimeout(doSearch, 350);
@@ -886,6 +1000,7 @@ def main():
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--data-dir", help="مجلد بديل لملفات JSON (للاختبار)")
     parser.add_argument("--no-browser", action="store_true")
+    parser.add_argument("--no-sync", action="store_true", help="لا تجلب نسخة GitHub عند التشغيل")
     args = parser.parse_args()
 
     if args.data_dir:
@@ -894,6 +1009,15 @@ def main():
     if not os.path.isdir(DATA_DIR):
         print(f"❌ المجلد غير موجود: {DATA_DIR}")
         return 1
+
+    if not args.no_sync and not args.data_dir:
+        print("🔄 التحقق من آخر نسخة على GitHub…")
+        result = sync_from_github()
+        for line in result.get("log", []):
+            print("   " + line)
+        if not result.get("ok"):
+            print("   ⚠️ " + str(result.get("error") or "فشل التحديث"))
+            print("   (سيعمل المحرر على النسخة الحالية على أي حال)")
 
     url = f"http://127.0.0.1:{args.port}"
     print("=" * 52)
