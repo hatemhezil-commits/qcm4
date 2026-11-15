@@ -205,7 +205,14 @@ def sync_from_github():
     يرجع dict فيه ok / updated / log / error."""
     log = []
 
-    code, out = run_git("fetch", "origin", timeout=90)
+    code, out = 1, ""
+    for attempt in range(3):
+        code, out = run_git("fetch", "origin", timeout=90)
+        if code == 0:
+            break
+        if attempt < 2:
+            log.append(f"↻ محاولة {attempt + 2}/3 للاتصال بـ GitHub…")
+            time.sleep(2)
     if code != 0:
         return {"ok": False, "error": "تعذّر الاتصال بـ GitHub", "log": log + [out.strip()]}
 
@@ -249,17 +256,23 @@ def sync_from_github():
 
 
 _last_fetch_ts = 0.0
+_last_fetch_ok = True
 
 
 def remote_behind():
-    """عدد الـ commits التي على GitHub وليست عندك (None إذا تعذّر الاتصال).
+    """عدد الـ commits التي على GitHub وليست عندك.
+    None إذا تعذّر الاتصال (المعلومات غير موثوقة).
     لا يجلب أكثر من مرة كل 60 ثانية."""
-    global _last_fetch_ts
+    global _last_fetch_ts, _last_fetch_ok
     now = time.time()
     if now - _last_fetch_ts > 60:
-        code, _ = run_git("fetch", "origin", timeout=20)
-        if code == 0:
-            _last_fetch_ts = now
+        # On note la tentative même en cas d'échec, pour ne pas bloquer
+        # l'interface à chaque appel quand le réseau est coupé.
+        _last_fetch_ts = now
+        code, _ = run_git("fetch", "origin", timeout=8)
+        _last_fetch_ok = (code == 0)
+    if not _last_fetch_ok:
+        return None
     code, out = run_git("rev-list", "--count", "HEAD..origin/main")
     if code != 0:
         return None
@@ -447,6 +460,8 @@ def api_status():
 
 @app.post("/api/pull")
 def api_pull():
+    global _last_fetch_ts
+    _last_fetch_ts = 0.0  # force un nouveau contrôle au prochain /api/status
     result = sync_from_github()
     if not result.get("ok"):
         return jsonify(result), 409
@@ -907,16 +922,22 @@ async function refreshStatus(){
   try {
     const s = await api("/api/status");
     const parts = [];
-    if(typeof s.behind === "number" && s.behind > 0){
+    if(s.behind === null || s.behind === undefined){
+      parts.push("⚠️ تعذّر التحقق من GitHub");
+    } else if(s.behind > 0){
       parts.push(`⬇️ ${s.behind} تحديث على GitHub`);
     }
     if(s.changed.length){
       parts.push(`● ${s.changed.length} ملف معدّل غير مرفوع`);
     }
     $("status").textContent = parts.join(" • ") || "✔ محدّث";
-    $("status").style.color = (s.behind > 0) ? "#9db4ff" : (s.changed.length ? "#ffd166" : "#7ee2a8");
+    let color = "#7ee2a8";
+    if(s.behind === null || s.behind === undefined) color = "#ff9a9a";
+    else if(s.behind > 0) color = "#9db4ff";
+    else if(s.changed.length) color = "#ffd166";
+    $("status").style.color = color;
     $("status").title = s.last_commit || "";
-    $("pullBtn").classList.toggle("primary", s.behind > 0);
+    $("pullBtn").classList.toggle("primary", !(s.behind === 0));
   } catch(e){}
 }
 
