@@ -182,6 +182,39 @@ def run_git(*args, timeout=180):
     return result.returncode, (result.stdout or "") + (result.stderr or "")
 
 
+def classify_git_error(out):
+    """يصنّف خطأ git: صلاحيات (توكن) / شبكة / آخر."""
+    low = (out or "").lower()
+    auth_markers = (
+        "returned error: 403",
+        "returned error: 401",
+        "error: 403",
+        "error: 401",
+        "403 forbidden",
+        "401 unauthorized",
+        "permission to ",
+        "permission denied",
+        "authentication failed",
+        "invalid username or password",
+        "could not read username",
+        "support for password authentication was removed",
+    )
+    if any(marker in low for marker in auth_markers):
+        return "auth"
+    network_markers = (
+        "unable to access",
+        "could not resolve",
+        "failed to connect",
+        "connection timed out",
+        "couldn't connect",
+        "connection reset",
+        "timed out",
+    )
+    if any(marker in low for marker in network_markers):
+        return "network"
+    return "other"
+
+
 def changed_data_files():
     code, out = run_git("status", "--porcelain", "--", "data")
     files = []
@@ -224,7 +257,11 @@ def sync_from_github():
             log.append("↻ محاولة ثانية للاتصال بـ GitHub…")
             time.sleep(2)
     if code != 0:
-        return {"ok": False, "error": "تعذّر الاتصال بـ GitHub", "log": log + [out.strip()]}
+        if classify_git_error(out) == "auth":
+            error = "GitHub رفض الدخول (403): التوكن لا يملك صلاحية على المستودع"
+        else:
+            error = "تعذّر الاتصال بـ GitHub"
+        return {"ok": False, "error": error, "log": log + [out.strip()]}
 
     code, out = run_git("rev-list", "--count", "HEAD..origin/main")
     if code != 0:
@@ -614,19 +651,16 @@ def api_push():
         run_git("rebase", "--abort")
         if stashed:
             run_git("stash", "pop")
-        low = (out or "").lower()
-        network = any(
-            marker in low
-            for marker in (
-                "unable to access",
-                "could not resolve",
-                "failed to connect",
-                "connection timed out",
-                "couldn't connect",
-                "connection reset",
-            )
-        )
-        if network:
+        kind = classify_git_error(out)
+        if kind == "auth":
+            return jsonify({
+                "error": (
+                    "GitHub رفض الدخول (403): الحساب/التوكن المستخدم لا يملك صلاحية على المستودع.\n"
+                    "✅ تعديلك محفوظ في commit محلي — صحّح التوكن ثم اضغط «🚀 رفع»."
+                ),
+                "log": log + [out],
+            }), 403
+        if kind == "network":
             return jsonify({
                 "error": (
                     "تعذّر الاتصال بـ GitHub أثناء المزامنة.\n"
@@ -666,13 +700,27 @@ def api_push():
             log.append("✅ أعدت تعديلاتك الأخرى غير المرفوعة.")
 
     if code != 0:
+        kind = classify_git_error(out)
+        if kind == "auth":
+            return jsonify({
+                "error": (
+                    "GitHub رفض الرفع (403): الحساب/التوكن المستخدم لا يملك صلاحية على المستودع.\n"
+                    "✅ تعديلك محفوظ في commit محلي — صحّح التوكن ثم اضغط «🚀 رفع»."
+                ),
+                "log": log + [out],
+            }), 403
+        if kind == "network":
+            return jsonify({
+                "error": (
+                    "تعذّر الرفع إلى GitHub (مشكلة شبكة).\n"
+                    "✅ تعديلك محفوظ في commit محلي — اضغط «🚀 رفع» مرة أخرى لإكمال الرفع."
+                ),
+                "log": log + [out],
+            }), 502
         return jsonify({
-            "error": (
-                "تعذّر الرفع إلى GitHub (مشكلة شبكة).\n"
-                "✅ تعديلك محفوظ في commit محلي — اضغط «🚀 رفع» مرة أخرى لإكمال الرفع."
-            ),
+            "error": "فشل الرفع. ✅ تعديلك محفوظ في commit محلي — راجع التفاصيل أدناه.",
             "log": log + [out],
-        }), 502
+        }), 500
 
     log.append("🎉 تم الرفع — Render سيعيد النشر تلقائيًا (1–3 دقائق).")
     start_behind_check(force=True)
@@ -1206,6 +1254,7 @@ async function pushChanges(){
   } catch(e){
     const title = e.status === 400 ? "لم يُرفع شيء — أخطاء في الأسئلة"
                 : e.status === 409 ? "لم يُرفع شيء — تعارض مع تعديلات GitHub"
+                : e.status === 403 ? "لم يُرفع شيء — GitHub رفض التوكن (صلاحيات)"
                 : e.status === 502 ? "لم يُرفع شيء — تعذّر الاتصال بـ GitHub"
                 : "لم يُرفع شيء";
     showError(title + " (HTTP " + (e.status || "?") + ")", [e.message].concat(e.log || []));
