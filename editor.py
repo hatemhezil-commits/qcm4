@@ -336,15 +336,8 @@ def start_background_sync():
     threading.Thread(target=run_sync, daemon=True).start()
 
 
-def validate_disk_file(rel_path):
-    full = os.path.join(BASE_DIR, rel_path)
-    try:
-        with open(full, "r", encoding="utf-8-sig") as f:
-            content = json.load(f)
-    except json.JSONDecodeError as e:
-        return [f"JSON غير صالح (سطر {e.lineno}, عمود {e.colno}): {e.msg}"]
-    except OSError as e:
-        return [f"تعذّر القراءة: {e}"]
+def validate_content(content):
+    """يتحقّق من محتوى ملف وحدة ويعيد قائمة المشاكل."""
     if not isinstance(content, dict) or "lessons" not in content:
         return ["بنية غير صالحة (module/lessons)"]
     errors = []
@@ -356,6 +349,29 @@ def validate_disk_file(rel_path):
                 text = (q.get("question") or "")[:50] if isinstance(q, dict) else "?"
                 errors.append(f"{label} [#{idx + 1}] {text} → {'؛ '.join(errs)}")
     return errors
+
+
+def validate_disk_file(rel_path):
+    full = os.path.join(BASE_DIR, rel_path)
+    try:
+        with open(full, "r", encoding="utf-8-sig") as f:
+            content = json.load(f)
+    except json.JSONDecodeError as e:
+        return [f"JSON غير صالح (سطر {e.lineno}, عمود {e.colno}): {e.msg}"]
+    except OSError as e:
+        return [f"تعذّر القراءة: {e}"]
+    return validate_content(content)
+
+
+def validate_committed_file(rel_path, rev="HEAD"):
+    """مشاكل الملف في آخر commit — نقارن بها لنمنع فقط الأخطاء الجديدة."""
+    code, out = run_git("show", f"{rev}:{rel_path}")
+    if code != 0:
+        return []
+    try:
+        return validate_content(json.loads(out))
+    except (json.JSONDecodeError, ValueError):
+        return []
 
 
 # ============================ API ============================
@@ -550,20 +566,32 @@ def api_push():
     if changed:
         log.append("📄 الملفات: " + ", ".join(changed))
         has_errors = False
+        old_issues = []
         for rel in changed:
             errors = validate_disk_file(rel)
-            if errors:
+            if not errors:
+                continue
+            # الأخطاء الموجودة أصلًا في GitHub لا تمنع الرفع (كانت ستمنع كل تعديل)
+            known = set(validate_committed_file(rel))
+            new_errors = [e for e in errors if e not in known]
+            old_issues.extend(e for e in errors if e in known)
+            if new_errors:
                 has_errors = True
-                log.append(f"❌ {rel}: {len(errors)} مشكلة")
-                log.extend("   • " + e for e in errors[:8])
+                log.append(f"❌ {rel}: {len(new_errors)} مشكلة جديدة")
+                log.extend("   • " + e for e in new_errors[:8])
         if has_errors:
             return jsonify({
                 "error": (
-                    "لم يُرفع شيء: ملفات الأسئلة فيها أخطاء. "
+                    "لم يُرفع شيء: تعديلك أدخل أسئلة غير صالحة. "
                     "صحّح الأسئلة المذكورة أدناه ثم اضغط «🚀 رفع» من جديد."
                 ),
                 "log": log,
             }), 400
+        if old_issues:
+            log.append(
+                f"ℹ️ {len(old_issues)} سؤال فيه مشكلة قديمة موجودة أصلًا على GitHub "
+                "(لا تمنع الرفع؛ يمكنك تصحيحها لاحقًا)."
+            )
 
         log.append("✅ التحقق سليم")
         code, out = run_git("add", "--", *changed)
