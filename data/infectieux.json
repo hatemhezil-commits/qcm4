@@ -2,6 +2,108 @@
   "module": "🦠 Infectieux",
   "lessons": {
     "Méningites et méningo-encéphalites": {
+      "2027": [
+        {
+          "question": "La méningoencéphalite tuberculeuse est exclue en cas :",
+          "options": [
+            "D'une méningite aiguë, avec une altération des fonctions supérieures, voire un syndrome confusionnel",
+            "D'absence de BCG",
+            "D'un contage tuberculeux, antécédents de tuberculose pulmonaire",
+            "Méningite survenant dans le cadre d'une miliaire ou de polyadénite"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        },
+        {
+          "question": "Les signes du trépied méningitique sont :",
+          "options": [
+            "Vomissements constants en jet",
+            "Toutes les réponses sont fausses",
+            "Céphalées violentes, unilatérales répondant aux antalgiques",
+            "Fièvre, frissons, faciès vultueux"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "La méningoencéphalite herpétique est :",
+          "options": [
+            "L'infection la plus fréquente en Algérie",
+            "Survient uniquement en cas de primo-infection ou réactivation du HSV de type 1",
+            "Se présente souvent par des troubles du caractère et du comportement, aphasie et des hallucinations",
+            "La PCR est très utile et rapide"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        },
+        {
+          "question": "La méningite au Streptococcus pneumoniae est :",
+          "options": [
+            "Grave dominée par la forme méningo-encéphalitique",
+            "Contagiosité",
+            "Survient surtout chez un immunocompétent",
+            "N'a pas un caractère récidivant"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        },
+        {
+          "question": "Une méningoencéphalite lymphocytaire, protéinorachie supérieure à 1g/L, glycorachie à 60% évoque :",
+          "options": [
+            "Une méningite listérienne",
+            "Une méningite tuberculeuse",
+            "Une méningite à West Nile",
+            "Méningite virale bénigne"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Cas clinique: Un jeune adulte se présente au Pavillon des urgences pour des céphalées, vomissements évoluant dans un contexte fébrile. L'interrogatoire retrouve un début aigu de 24 h, symptomatologie similaire chez sa sœur âgée de 6 ans, notion de traumatisme crânien, l'examen retrouve : un herpès nasolabial, arthralgies, une splénomégalie. Quels sont les germes les plus probable :",
+          "options": [
+            "Le Streptococcus pneumoniae",
+            "L'Haemophilus influenzae",
+            "Le Staphylococcus aureus",
+            "Le Neisseria meningitidis"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Cas clinique: Un jeune adulte se présente au Pavillon des urgences pour des céphalées, vomissements évoluant dans un contexte fébrile. L'interrogatoire retrouve un début aigu de 24 h, symptomatologie similaire chez sa sœur âgée de 6 ans, notion de traumatisme crânien, l'examen retrouve : un herpès nasolabial, arthralgies, une splénomégalie. Que faites-vous pour confirmer le diagnostic :",
+          "options": [
+            "Numération formule sanguine",
+            "Recherche des antigènes solubles dans le LCS, les urines et le sang",
+            "Imagerie médicale (TDM ou IRM)",
+            "Ponction lombaire avec étude cytochimique et bactériologique du LCS"
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Cas clinique: Un jeune adulte se présente au Pavillon des urgences pour des céphalées, vomissements évoluant dans un contexte fébrile. L'interrogatoire retrouve un début aigu de 24 h, symptomatologie similaire chez sa sœur âgée de 6 ans, notion de traumatisme crânien, l'examen retrouve : un herpès nasolabial, arthralgies, une splénomégalie. Quels antibiotiques proposez-vous ?",
+          "options": [
+            "Amoxicilline",
+            "Céphalosporine de 3e génération",
+            "Amoxicilline + Gentamycine",
+            "Vancomycine + céphalosporine de 3e génération"
+          ],
+          "correct_option_ids": [
+            0,
+            1
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Cas clinique: Un jeune adulte se présente au pavillon des urgences pour des céphalées, vomissements évoluant dans un contexte fébrile. L'interrogatoire retrouve un début aigu de 24 h, avec symptomatologie similaire chez sa sœur âgée de 6 ans. Quel est le germe le plus probable:",
@@ -940,6 +1042,92 @@
       ]
     },
     "Sepsis, choc septique et bactériémies": {
+      "2027": [
+        {
+          "question": "Selon les définitions actuelles (Sepsis-3, 2016), comment le Sepsis est-il défini ?",
+          "options": [
+            "Présence d'au moins 2 critères du SRIS associés a une infection suspectée ou documentée",
+            "Présence d'une bactériémie documentée par des hémocultures positives",
+            "Dysfonction d'organe menaçant le pronostic vital consécutive à une réponse dérégulée de l'hôte à une infection (SOFA ≥ 2)",
+            "Hypotension artérielle persistant malgré un remplissage vasculaire adéquat supérieur à 30 ml/kg"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Quel est le germe le plus fréquemment responsable des bactériémies à BGN ?",
+          "options": [
+            "Pseudomonas aeruginosa",
+            "Escherichia coli",
+            "Klebsiella pneumoniae",
+            "Acinetobacter baumannii"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Parmi les éléments suivants du score qSOFA (Quick SOFA), quel critère NE FAIT PAS partie du score ?",
+          "options": [
+            "Pression artérielle systolique ≤ 100 mmHg",
+            "Fréquence respiratoire ≥ 22 /min",
+            "Température corporelle > 38.3°C ou < 36.0°C",
+            "Altération de la conscience (Score de Glasgow ≤ 14)"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Concernant la réalisation des hémocultures chez un patient suspect de bactériémie, quelle est la règle recommandée ?",
+          "options": [
+            "Prélever 1 seul flacon aérobie avant antibiothérapie, puis un second après la mise en route du traitement",
+            "Prélever au moins 2 séries (aérobie et anaérobie) avant toute antibiothérapie, soit 4 flacons minimum",
+            "Prélever uniquement une des pics fébriles avec un volume de 2 ml par flacon",
+            "Attendre obligatoirement les résultats du bilan biologique (NFS et CRP) avant de prélever"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quelle est l'attitude thérapeutique recommandée concernant le remplissage vasculaire dans la première heure de prise en charge d'un choc septique ?",
+          "options": [
+            "Remplissage initial par hydroxyéthylamidon (HEA) à 6% à la dose de 50 ml/kg",
+            "Remplissage par cristalloïdes (ex. Ringer Lactate ou NaCl 0.9%) à raison de 30 ml/kg",
+            "Remplissage par sérum salé hypertonique à 3% en première intention",
+            "Apport de bicarbonate de sodium systématique avant toute réanimation volémique"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quel est le vasopresseur de premier choix dans le choc septique avec hypotension pour maintenir une PAM ≥ 65 mmHg ?",
+          "options": [
+            "Dopamine",
+            "Dobutamine",
+            "Noradrénaline",
+            "Adrénaline"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Quelle est la conduite à tenir recommandée concernant l'antibiothérapie empirique lors d'une suspicion de sepsis / choc septique à BGN ?",
+          "options": [
+            "Débuter l'antibiothérapie à large spectre dans l'heure suivant la reconnaissance du sepsis",
+            "Différer l'antibiothérapie jusqu'à obtention des résultats de l'antibiogramme (48-72h)",
+            "Prescrire une monothérapie par macrolide per os pendant 14 jours",
+            "Mettre en place une antibiothérapie spectre étroit en attendant la confirmation microbiologique"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le qSOFA comprend trois critères. Lequel ne fait pas partie du qSOFA ?",
@@ -1454,6 +1642,46 @@
       ]
     },
     "Infections à staphylocoque": {
+      "2027": [
+        {
+          "question": "Lesquelles parmi les propositions suivantes concernant la staphylococcie maligne de la face, sont fausses :",
+          "options": [
+            "Elle se présente sous forme d'un placard rouge, chaud et douloureux",
+            "Elle occupe la totalité de la face",
+            "C'est une bactériémie fulminante",
+            "Elle se présente comme une cellulite diffuse avec une phlébite extensive"
+          ],
+          "correct_option_ids": [
+            0,
+            1
+          ]
+        },
+        {
+          "question": "Lesquelles parmi ces propositions concernant le staphylocoque sont justes :",
+          "options": [
+            "C'est un germe rarement retrouvé dans l'environnement",
+            "L'homme est son réservoir principal",
+            "C'est un saprophyte des fosses nasales de l'homme",
+            "Il est exceptionnellement isolé au niveau de la peau"
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Le staphylococcus aureus est :",
+          "options": [
+            "Un cocci gram positif",
+            "Un bacille gram positif",
+            "Un cocci gram négatif",
+            "Un bacille gram négatif"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Les infections à staphylocoque sont parfois gravissimes. Parmi les propositions ci-après quelle affirmation est exacte ?",
@@ -1917,6 +2145,48 @@
       ]
     },
     "Infections à streptocoque (angine, scarlatine, RAA, impétigo)": {
+      "2027": [
+        {
+          "question": "Les manifestations du streptocoque sont polymorphes où nombreuses manifestations cutanées lui sont attribuées. Choisissez les réponses fausses :",
+          "options": [
+            "Impétigo et érysipèle.",
+            "Verrues et condylomes.",
+            "La cellulite nécrosante, scarlatine.",
+            "Purpura fulminans."
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        },
+        {
+          "question": "Les signes cliniques de la bactériémie streptococcique sont ceux de toute bactériémie à ce tableau s'associent certaines manifestations évocatrices. Indiquez la (les) réponse (s) justes (s) :",
+          "options": [
+            "Peut donner des signes articulaires et des métastases septiques.",
+            "Elle est à point de départ lymphatique.",
+            "Doit faire rechercher systématiquement une immunodépression cellulaire.",
+            "Signes cutanés : exanthème scarlatiniforme, placards érysipélatoïdes"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Les complications post streptococciques peuvent être d'ordre inflammatoire. Quelles sont parmi les propositions suivantes qui doivent vous faire rechercher ces complications 15 jours après une angine érythémato-pultacée :",
+          "options": [
+            "Un souffle systolique",
+            "Fièvre persistante",
+            "Fasciite nécrosante",
+            "VS à 100 la première heure"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Un traitement efficace d'une angine streptococcique peut être assuré par quelques molécules parmi les suivantes. Indiquer les réponses fausses?:",
@@ -2415,6 +2685,36 @@
       ]
     },
     "Dermohypodermites bactériennes": {
+      "2027": [
+        {
+          "question": "La dermohypodermite bactérienne non nécrosante de l'adulte, dans sa forme commune :",
+          "options": [
+            "Elle est principalement d'origine streptococcique",
+            "Elle atteint exclusivement l'épiderme",
+            "Un intertrigo interorteil peut constituer une porte d'entrée",
+            "Un lymphœdème chronique favorise sa survenue et ses récidives."
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Les éléments suivants doivent faire suspecter une dermohypodermite bactérienne nécrosante :",
+          "options": [
+            "Une douleur intense, disproportionnée par rapport aux lésions visibles",
+            "Une extension rapide des lésions associée à une altération de l'état général",
+            "Un simple érythème localisé, stable et peu douloureux, sans signe général",
+            "Une hypoesthésie cutanée ou des zones de nécrose"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le traitement de la dermohypodermite nécrosante repose sur certains critères, lesquels ?",
@@ -2617,6 +2917,48 @@
       ]
     },
     "Diphtérie": {
+      "2027": [
+        {
+          "question": "La diphtérie est une:",
+          "options": [
+            "Maladie grave, encore mortelle",
+            "Toxi-infection parasitaire grave",
+            "Due au Corynebacterium diphtheriae ou bacille de Klebs-Löffler",
+            "C'est une maladie immunisante, contagieuse, à déclaration obligatoire"
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        },
+        {
+          "question": "Les fausses membranes sont :",
+          "options": [
+            "Pauvres en bacilles.",
+            "Tapissant une muqueuse très tuméfiée et ulcérée",
+            "Associées à des signes loco-régionaux : Un coryza, une adénopathie sous angulo-maxillaire",
+            "Associées à des signes d'imprégnation toxinique ; Pâleur et tachycardie, abattement"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Concernant la recherche du pouvoir toxinogène de C. diphtheriae, laquelle de ces propositions est exacte ?",
+          "options": [
+            "Elle est indispensable en urgence, car il peut exister des fausses membranes en l'absence de toxine",
+            "La présence de fausses membranes suffit à prouver la production de toxine",
+            "Le test d'Elek recherche la toxine",
+            "La PCR met en évidence la production de toxine dans le milieu de culture"
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        }
+      ],
       "2025": [
         {
           "question": "La diphtérie est une :",
@@ -2933,6 +3275,44 @@
       ]
     },
     "Tétanos": {
+      "2027": [
+        {
+          "question": "A propos de la prévention du tétanos après une morsure d'animal souillée chez un sujet non vacciné ou à statut vaccinal inconnu :",
+          "options": [
+            "Aucun rappel n'est nécessaire si la plaie est lavée à l'eau de Javel",
+            "Administration immédiate du vaccin DT + Immunoglobulines spécifiques tétaniques (250 à 500 UI)",
+            "Administration de la sérothérapie tétanique seule sans vaccin",
+            "Seule l'antibiothérapie par amoxicilline protège du tétanos"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quel signe clinique est particulièrement évocateur au début du tétanos généralisé ?",
+          "options": [
+            "Trismus fébrile",
+            "Opisthotonos",
+            "Trismus irréductible",
+            "Paralysie flasque isolée"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Un patient non vacciné contre le tétanos présente un trismus après une plaie souillée. Quelle proposition est correcte ?",
+          "options": [
+            "Une culture positive est indispensable au diagnostic du tétanos",
+            "La guérison du tétanos confère une immunité durable",
+            "C'est une urgence médicale dont le diagnostic est clinique.",
+            "L'antibiothérapie seule neutralise la toxine même fixée"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        }
+      ],
       "2025": [
         {
           "question": "Quel germe est responsable de la maladie du tétanos ?",
@@ -3213,6 +3593,46 @@
       ]
     },
     "Brucellose": {
+      "2027": [
+        {
+          "question": "Brucellose : Quelle exposition est un facteur clé de contamination ?",
+          "options": [
+            "Lait cru non pasteurisé",
+            "Viande bien cuite",
+            "Contact avec les chiens",
+            "Contact avec une personne malade"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        },
+        {
+          "question": "Quelles sont les formes focalisées les plus décrites dans la brucellose ?",
+          "options": [
+            "Spondylodiscite lombaire",
+            "Endocardite infectieuse",
+            "Atteinte neuroméningée",
+            "Toutes les réponses sont fausses"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Un éleveur ayant consommé du lait cru présente une fièvre prolongée, des sueurs et une douleur rachidienne lombaire persistante. Quelle complication faut-il rechercher ?",
+          "options": [
+            "Spondylodiscite brucellienne",
+            "Une hernie discale compliquée",
+            "Pyélonéphrite aiguë",
+            "Brucellose aiguë hyperalgique"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2025": [
         {
           "question": "Les antibiotiques actifs sur les Brucelles sont :",
@@ -3459,6 +3879,34 @@
       ]
     },
     "Leptospirose": {
+      "2027": [
+        {
+          "question": "La leptospirose est une maladie infectieuse : cochez les bonnes réponses",
+          "options": [
+            "Strictement humaine",
+            "Professionnelle",
+            "Liées aux loisirs",
+            "À déclaration obligatoire"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Concernant le diagnostic microbiologique de la leptospirose se fait :",
+          "options": [
+            "5 premiers jours : urines",
+            "6e - 12e jour : LCR",
+            "A partir 12e jour : urines",
+            "Toutes les réponses sont justes"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Concernant la leptospirose, lequel de ces réponses est juste ?",
@@ -3683,6 +4131,32 @@
       ]
     },
     "Fièvre boutonneuse méditerranéenne (rickettsioses)": {
+      "2027": [
+        {
+          "question": "FBM : Quel est le vecteur habituel de cette infection ?",
+          "options": [
+            "[…]les",
+            "[…]en",
+            "[…]",
+            "[…] chien"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quelle association clinique évoque le diagnostic de la FBM ?",
+          "options": [
+            "Fièvre, escarre noire et exanthème",
+            "Fièvre, escarre noire et ictère",
+            "Éruptions vésiculeuses, fièvre et amaigrissement",
+            "Fièvre, éruptions papuleuses et contractures"
+          ],
+          "correct_option_ids": [
+            0
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quel est le vecteur de la FBM ?",
@@ -4062,6 +4536,34 @@
       ]
     },
     "Paludisme": {
+      "2027": [
+        {
+          "question": "Paludisme : Quel examen permet la mise en évidence des parasites sanguins?",
+          "options": [
+            "Culture",
+            "Goutte épaisse et frottis sanguin mince",
+            "Sérologie paludéenne",
+            "Sérologie de Widal"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Un voyageur revenant d'une zone impaludée présente fièvre et troubles de conscience. Quelle attitude est prioritaire ?",
+          "options": [
+            "Hospitalisation en soins intensifs",
+            "Frottis mince et goutte épaisse",
+            "Commencer l'artésunate per os",
+            "Commencer l'artésunate per IV"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            3
+          ]
+        }
+      ],
       "2025": [
         {
           "question": "Le paludisme est une maladie infectieuse :",
@@ -4644,6 +5146,22 @@
       ]
     },
     "Toxoplasmose": {
+      "2027": [
+        {
+          "question": "Les modes de transmission de la toxoplasmose sont multiples, choisissez les bonnes réponses :",
+          "options": [
+            "Aérienne",
+            "Transplacentaire",
+            "Greffe d'organes",
+            "Digestive"
+          ],
+          "correct_option_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "La toxoplasmose est une anthropozoonose qui se transmet par :",
@@ -4861,6 +5379,34 @@
       ]
     },
     "Amibiase": {
+      "2027": [
+        {
+          "question": "L'amibiase intestinale, infection liée au péril fécal, se manifeste par un tableau clinique caractéristique. Parmi les propositions suivantes, quelles sont les réponses justes ?",
+          "options": [
+            "Syndrome dysentérique fébrile",
+            "Diarrhée liquidienne avec colite bipolaire",
+            "La localisation hépatique est une complication grave",
+            "Syndrome toxinique"
+          ],
+          "correct_option_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "question": "Vous êtes amené à poser le diagnostic d'amibiase intestinale. Quelle est la ou les affirmation(s) exacte(s) ?",
+          "options": [
+            "Elle est due à Entamoeba histolytica",
+            "Elle se transmet par voie verticale",
+            "Le diagnostic est exclusivement clinique",
+            "Une forme asymptomatique est possible"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Au cours de la forme intestinale de l'ambiase, quelle est la proposition fausse ?",
@@ -5039,6 +5585,32 @@
       ]
     },
     "Choléra": {
+      "2027": [
+        {
+          "question": "Choléra : Quel agent est responsable du choléra ?",
+          "options": [
+            "Salmonella Typhi",
+            "Vibrio cholerae El Tor",
+            "Shigella cholerae",
+            "Clostridium cholerae"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quel aspect des selles est typique du choléra ?",
+          "options": [
+            "Selles en jus de melon",
+            "Selles aqueuses en eau de riz",
+            "Selles glaireuses sanglantes",
+            "Selles graisseuses"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quel est le signe clinique cardinal du choléra ?",
@@ -5261,6 +5833,74 @@
       ]
     },
     "Fièvre typhoïde": {
+      "2027": [
+        {
+          "question": "La fièvre typhoïde :",
+          "options": [
+            "Elle est due à Salmonella Typhi.",
+            "Son réservoir est essentiellement animal.",
+            "Sa transmission se fait principalement par voie féco-orale.",
+            "Un porteur asymptomatique peut participer à sa transmission."
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Au cours de la fièvre typhoïde au 1er septénaire :",
+          "options": [
+            "Une fièvre associée à des céphalées et à des douleurs abdominales pourrait être évocatrice",
+            "Une diarrhée est indispensable pour évoquer le diagnostic.",
+            "Une constipation est fréquemment observée.",
+            "L'absence de taches rosées lenticulaires permet d'exclure le diagnostic"
+          ],
+          "correct_option_ids": [
+            0,
+            2
+          ]
+        },
+        {
+          "question": "Concernant le diagnostic de la fièvre typhoïde :",
+          "options": [
+            "La coproculture peut permettre l'isolement de Salmonella Typhi.",
+            "Une coproculture négative permet d'éliminer le diagnostic.",
+            "Un sérodiagnostic de Widal positif aide à confirmer une infection aiguë.",
+            "L'isolement de la bactérie permet d'étudier sa sensibilité aux antibiotiques"
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "Chez un patient atteint de fièvre typhoïde, une douleur abdominale brutale avec défense généralisée et une hyperleucocytose fait suspecter en priorité :",
+          "options": [
+            "Une rechute de la fièvre typhoïde.",
+            "Une perforation intestinale.",
+            "Un portage chronique de Salmonella Typhi.",
+            "Une réaction habituelle à l'antibiothérapie."
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Le choix de l'antibiotique tient compte de la gravité et des données de résistance en Algérie.",
+          "options": [
+            "La ciprofloxacine est le traitement de premier choix",
+            "La vaccination dispense des précautions d'hygiène alimentaire",
+            "L'accès à l'eau potable et l'assainissement contribuent à prévenir la maladie.",
+            "L'amoxicilline est le traitement de premier choix"
+          ],
+          "correct_option_ids": [
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Quelle complication digestive est la plus redoutée en cas de FT?",
@@ -5850,6 +6490,62 @@
       ]
     },
     "Infection à VIH / SIDA": {
+      "2027": [
+        {
+          "question": "Quelles sont les principales voies de transmission du virus de l'immunodéficience humaine (VIH) ?",
+          "options": [
+            "Transmission verticale",
+            "Transmission cutanée",
+            "Transmission surtout par le sang et dérivés",
+            "Transmission sexuelle"
+          ],
+          "correct_option_ids": [
+            0,
+            3
+          ]
+        },
+        {
+          "question": "Quelles sont les situations justifiant la prescription d'une sérologie VIH ?",
+          "options": [
+            "Intervention chirurgicale",
+            "Tatouage",
+            "Bilan prénuptial",
+            "Grossesse"
+          ],
+          "correct_option_ids": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "question": "À quel moment du terme la probabilité de transmission du VIH de la mère séropositive à son fœtus est-elle maximale ?",
+          "options": [
+            "Au premier trimestre.",
+            "Au troisième trimestre.",
+            "Pendant l'accouchement.",
+            "Au moment de l'allaitement."
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Le but d'un traitement précoce au cours d'une infection à VIH est pour :",
+          "options": [
+            "Réduire la constitution des réservoirs",
+            "Augmenter le taux des CD4",
+            "Réduire la transmission",
+            "Ralentir l'évolution vers le SIDA"
+          ],
+          "correct_option_ids": [
+            0,
+            2,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "La pandémie de l'infection à rétrovirus ne cesse de s'accroître. Quelles sont parmi les situations suivantes celles qui peuvent exposer à la contamination par le VIH ?",
@@ -6558,6 +7254,44 @@
       ]
     },
     "Varicelle et zona": {
+      "2027": [
+        {
+          "question": "Un enfant de 7 ans présente une éruption prurigineuse généralisée associant des lésions à différents stades évolutifs. Quel élément est le plus caractéristique de la varicelle ?",
+          "options": [
+            "Des lésions vésiculeuses toutes au même stade évolutif",
+            "Une éruption débutant systématiquement aux paumes et aux plantes",
+            "La coexistence de lésions vésiculeuses à différents stades évolutifs",
+            "Une éruption exclusivement maculeuse"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "La varicelle. Quel est le principal mode de transmission du virus varicelle-zona ?",
+          "options": [
+            "La voie féco-orale par les mains sales.",
+            "La voie respiratoire et le contact avec le liquide des vésicules",
+            "La consommation d'aliments contaminés",
+            "La piqûre d'un insecte vecteur"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Une femme de 72 ans présente un zona thoracique. 3 mois après la disparition des lésions cutanées, elle a toujours de douleurs intenses dans le même territoire. Quel est le diagnostic le plus probable ?",
+          "options": [
+            "Neuropathie Diabétique",
+            "Névralgie Du Trijumeau",
+            "Névralgie Post-Zostérienne",
+            "Myélopathie Compressive"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Chez quel terrain la varicelle est-elle la plus grave ?",
@@ -6734,6 +7468,20 @@
       ]
     },
     "Rubéole, rougeole et fièvres éruptives": {
+      "2027": [
+        {
+          "question": "Une femme de 28 ans, non immunisée contre la rubéole, souhaite planifier une grossesse. Quelle est la principale mesure de prévention de la rubéole congénitale ?",
+          "options": [
+            "L'administration systématique d'antibiotiques",
+            "La séro-vaccination antirubéoleuse avant la grossesse",
+            "L'administration systématique d'immunoglobulines",
+            "Toutes les réponses sont fausses"
+          ],
+          "correct_option_ids": [
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le virus de la rubéole se transmet principalement :",
@@ -7007,6 +7755,44 @@
       ]
     },
     "Rage": {
+      "2027": [
+        {
+          "question": "Quel est le geste local immédiat le plus important et le plus efficace à réaliser après toute morsure d'animal suspect ?",
+          "options": [
+            "Suturer immédiatement la plaie pour éviter la surinfection extérieure",
+            "Appliquer un pansement occlusif sans lavage préalable",
+            "Lavage abondant de la plaie à l'eau et au savon pendant au moins 15 minutes",
+            "Infiltrer la plaie uniquement avec des antibiotiques locaux"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        },
+        {
+          "question": "Selon la classification OMS des expositions au risque rabique, à quel grade correspond une griffe mineure ou une abrasion sans saignement ?",
+          "options": [
+            "Grade 1",
+            "Grade 2",
+            "Grade 3",
+            "Grade 4"
+          ],
+          "correct_option_ids": [
+            1
+          ]
+        },
+        {
+          "question": "Quelle est la prise en charge prophylactique rabique recommandée pour une exposition de Grade 3 (morsures profondes, atteinte du visage ou des mains) ?",
+          "options": [
+            "Soins locaux seuls",
+            "Vaccination antirabique seule",
+            "Administration de sérum antirabique (immunoglobulines) + Vaccination antirabique",
+            "Antibiothérapie seule pendant 14 jours"
+          ],
+          "correct_option_ids": [
+            2
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Cas Clinique: Un patient de 18 ans, s'est présenté au Pavillon des urgences pour des lésions siégeant au niveau du visage suite à une morsure par un animal. Cette lésion appartient à quel grade:",
@@ -7411,6 +8197,21 @@
       ]
     },
     "Endocardite infectieuse": {
+      "2027": [
+        {
+          "question": "Les endocardites staphylococciques possèdent certaines caractéristiques. Lesquelles parmi ces propositions sont justes ?",
+          "options": [
+            "Elles surviennent uniquement après chirurgie cardiovasculaire",
+            "Elles évoluent habituellement sur un mode aigu",
+            "Les endocardites après chirurgie cardiovasculaire sont dues au staphylocoque doré",
+            "Elles induisent des lésions très délabrantes"
+          ],
+          "correct_option_ids": [
+            1,
+            3
+          ]
+        }
+      ],
       "2026": [
         {
           "question": "Le diagnostic d'endocardite doit être évoqué chez tout sujet fébrile ayant une cardiopathie et un souffle à l'auscultation auxquels peuvent s'associer des signes extracardiaques. Choisissez-la (les) bonne(s) :",
