@@ -5077,7 +5077,7 @@
             "1 ; 3"
           ],
           "correct_option_ids": [
-            0
+            3
           ]
         },
         {
@@ -5089,7 +5089,8 @@
             "Le décès survient après l'age de 5 ans"
           ],
           "correct_option_ids": [
-            0
+            0,
+            2
           ]
         }
       ]
@@ -9277,8 +9278,7 @@
             "Quadranopsie bitemporale"
           ],
           "correct_option_ids": [
-            1,
-            2
+            4
           ]
         },
         {

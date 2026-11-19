@@ -2263,11 +2263,9 @@
               "Devenu eleve"
             ],
             "correct_option_ids": [
-              1,
-              3
-            ],
-            "explanation": "",
-            "reviewed": false
+              0,
+              2
+            ]
           },
           {
             "question": "Cocher la ou les proposition(s) fausse, Le traitement radication de HP",
